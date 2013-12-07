@@ -1,0 +1,22 @@
+html, body {
+  width:  100%;
+  height: 100%;
+  margin: 0px;
+}
+
+table {
+	margin: 40px auto;
+}
+
+img {
+	margin:10px;
+}
+
+table td {2
+	vertical-align:top;	
+	text-align:center
+}
+
+.txt {
+	text-align:center
+}
