@@ -356,7 +356,7 @@
 			isMouseDown = true;
 			handleMouseMove(e);
 			document.addEventListener("mousemove", handleMouseMove, true);
-			$("#debug").append("<br/>vertices.push(new b2Vec2(" + mouseX + ", " + mouseY + "));");
+			//$("#debug").append("<br/>vertices.push(new b2Vec2(" + mouseX + ", " + mouseY + "));");
 		}, true);
 
 		document.addEventListener("mouseup", function() {
@@ -532,7 +532,7 @@
 				if(fixture.GetBody() == circleBody0 || fixture.GetBody() == circleBody1 || fixture.GetBody() == circleBody2) {
 					if(bodies.indexOf(fixture.GetBody()) <= -1)
 						bodies.push(fixture.GetBody());
-					$("#debug").append("woot");
+					
 					if(bodies.length >= 3 && !gameOver) {
 						$( "#popup" ).popup( "open" );
 						gameOver = true;

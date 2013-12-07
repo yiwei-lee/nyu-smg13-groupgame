@@ -274,7 +274,7 @@ function init() {
 		isMouseDown = true;
 		handleMouseMove(e);
 		document.addEventListener("mousemove", handleMouseMove, true);
-		$("#debug").append("<br/>vertices.push(new b2Vec2(" + mouseX + ", " + mouseY + "));");
+		//$("#debug").append("<br/>vertices.push(new b2Vec2(" + mouseX + ", " + mouseY + "));");
 	}, true);
 
 	document.addEventListener("mouseup", function() {
