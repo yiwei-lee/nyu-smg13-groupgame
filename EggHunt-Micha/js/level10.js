@@ -1,4 +1,4 @@
-function init10() {
+function level10() {
 	var   b2Vec2 = Box2D.Common.Math.b2Vec2,  	
 	b2AABB = Box2D.Collision.b2AABB,	
 	b2BodyDef = Box2D.Dynamics.b2BodyDef,	
@@ -212,7 +212,7 @@ function init10() {
 	debugDraw.SetFlags(b2DebugDraw.e_shapeBit | b2DebugDraw.e_jointBit);
 	world.SetDebugDraw(debugDraw);
 
-	window.setInterval(update, 1000 / 60);
+	intervalID = window.setInterval(update, 1000 / 60); //intervalID should be defined in js file that calls this levelX.js
 
 	//mouse
 
@@ -301,7 +301,7 @@ function init10() {
 		 sA=fxA.IsSensor();
 		 sB=fxB.IsSensor();
 		 if((sA && !sB) || (sB && !sA))	{
-			 if(sA)	{
+			 if(sA && contact.GetFixtureB().GetBody() != frameBody)	{
 				 // $("#debug").append(contact.GetFixtureA().GetBody().GetUserData());
 				 destroy_list.push(contact.GetFixtureA().GetBody());
 				 // make collected candy colorfull
@@ -315,13 +315,13 @@ function init10() {
 						  $( this ).attr("src", "img/lolly.png");
 					 });
 				 } else if(candyType == "drop") {
-						 $(".collectable3").each(function() {
-							  $( this ).attr("src", "img/drop.png");
-						 });
+					 $(".collectable3").each(function() {
+						  $( this ).attr("src", "img/drop.png");
+					 });
 				 } 
 				 
 			 }
-			 else	{
+			 else if(sB && contact.GetFixtureA().GetBody() != frameBody) {
 				 // $("#debug").append(contact.GetFixtureB().GetBody().GetUserData());
 				 destroy_list.push(contact.GetFixtureB().GetBody());
 				// make collected candy colorfull
@@ -347,8 +347,8 @@ function init10() {
 	
 	//update
 	var basketAABB = new b2AABB;
-	basketAABB.lowerBound = new b2Vec2(13.3, 4.8);
-	basketAABB.upperBound = new b2Vec2(16, 7);
+	basketAABB.lowerBound = new b2Vec2(13.04, 7.64);
+	basketAABB.upperBound = new b2Vec2(16, 9);
 	var bodies = [];
 	var gameOver = false;
 	

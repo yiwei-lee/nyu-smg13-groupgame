@@ -1,4 +1,4 @@
-function init() {
+function level8() {
 	var   b2Vec2 = Box2D.Common.Math.b2Vec2,  	
 	b2AABB = Box2D.Collision.b2AABB,	
 	b2BodyDef = Box2D.Dynamics.b2BodyDef,	
@@ -200,7 +200,7 @@ function init() {
 	debugDraw.SetFlags(b2DebugDraw.e_shapeBit | b2DebugDraw.e_jointBit);
 	world.SetDebugDraw(debugDraw);
 
-	window.setInterval(update, 1000 / 60);
+	intervalID = window.setInterval(update, 1000 / 60); //intervalID should be defined in js file that calls this levelX.js
 
 	//mouse
 
@@ -334,9 +334,15 @@ function init() {
 	world.SetContactListener(colListener);
 	
 	//update
-	var basketAABB = new b2AABB;
-	basketAABB.lowerBound = new b2Vec2(12.44, 1.4);
-	basketAABB.upperBound = new b2Vec2(16, 7.42);
+	var basketAABB1 = new b2AABB;
+	basketAABB1.lowerBound = new b2Vec2(13.74, 1.3);
+	basketAABB1.upperBound = new b2Vec2(16, 2.42);
+	var basketAABB2 = new b2AABB;
+	basketAABB2.lowerBound = new b2Vec2(13.2, 4.14);
+	basketAABB2.upperBound = new b2Vec2(16, 5);
+	var basketAABB3 = new b2AABB;
+	basketAABB3.lowerBound = new b2Vec2(12.14, 6.9);
+	basketAABB3.upperBound = new b2Vec2(16, 7.44);
 	var bodies = [];
 	var gameOver = false;
 	
@@ -369,7 +375,9 @@ function init() {
 		world.DrawDebugData();
 		world.ClearForces();
 
-		world.QueryAABB(testIfEggsAreInBasket, basketAABB);
+		world.QueryAABB(testIfEggsAreInBasket, basketAABB1);
+		world.QueryAABB(testIfEggsAreInBasket, basketAABB2);
+		world.QueryAABB(testIfEggsAreInBasket, basketAABB3);
  
 		// Destroy all bodies in destroy_list
 		for (var i in destroy_list) {
@@ -384,8 +392,9 @@ function init() {
 		if(fixture.GetBody().GetType() != b2Body.b2_staticBody) {
 			
 			if(fixture.GetBody() == circleBody0 || fixture.GetBody() == circleBody1 || fixture.GetBody() == circleBody2) {
-				if(bodies.indexOf(fixture.GetBody()) <= -1)
+				if(bodies.indexOf(fixture.GetBody()) <= -1) {
 					bodies.push(fixture.GetBody());
+				}
 				
 				if(bodies.length >= 3 && !gameOver) {
 					$( "#popup" ).popup( "open" );

@@ -1,4 +1,4 @@
-function init() {
+function level4() {
 	var   b2Vec2 = Box2D.Common.Math.b2Vec2,  	
 	b2AABB = Box2D.Collision.b2AABB,	
 	b2BodyDef = Box2D.Dynamics.b2BodyDef,	
@@ -159,7 +159,7 @@ function init() {
 	debugDraw.SetFlags(b2DebugDraw.e_shapeBit | b2DebugDraw.e_jointBit);
 	world.SetDebugDraw(debugDraw);
 
-	window.setInterval(update, 1000 / 60);
+	intervalID = window.setInterval(update, 1000 / 60); //intervalID should be defined in js file that calls this levelX.js
 
 	//mouse
 

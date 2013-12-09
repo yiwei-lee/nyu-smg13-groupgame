@@ -1,4 +1,4 @@
-function init() {
+function level3() {
 	var   b2Vec2 = Box2D.Common.Math.b2Vec2,  	
 	b2AABB = Box2D.Collision.b2AABB,	
 	b2BodyDef = Box2D.Dynamics.b2BodyDef,	
@@ -321,7 +321,7 @@ function init() {
 	debugDraw.SetFlags(b2DebugDraw.e_shapeBit | b2DebugDraw.e_jointBit);
 	world.SetDebugDraw(debugDraw);
 
-	window.setInterval(update, 1000 / 60);
+	intervalID = window.setInterval(update, 1000 / 60); //intervalID should be defined in js file that calls this levelX.js
 
 	//mouse
 
@@ -456,7 +456,7 @@ function init() {
 	
 	//update
 	var basketAABB = new b2AABB;
-	basketAABB.lowerBound = new b2Vec2(15.08, 8.1);
+	basketAABB.lowerBound = new b2Vec2(15.5, 7.5);
 	basketAABB.upperBound = new b2Vec2(16, 9);
 	var bodies = [];
 	var gameOver = false;

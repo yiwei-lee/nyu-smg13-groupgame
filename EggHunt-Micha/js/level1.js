@@ -1,4 +1,4 @@
-	function init() {
+function level1() {		
 		var   b2Vec2 = Box2D.Common.Math.b2Vec2,  	
 		b2AABB = Box2D.Collision.b2AABB,	
 		b2BodyDef = Box2D.Dynamics.b2BodyDef,	
@@ -27,8 +27,8 @@
 
 		var bodyDef = new b2BodyDef;
 
-		var width = $("#canvas").width();
-		var height = $("#canvas").height();
+		var width = 800;
+		var height = 450;
 		var SCALE = 50.0;
 		
 
@@ -345,7 +345,8 @@
 		debugDraw.SetFlags(b2DebugDraw.e_shapeBit | b2DebugDraw.e_jointBit);
 		world.SetDebugDraw(debugDraw);
 
-		window.setInterval(update, 1000 / 60);
+		intervalID = window.setInterval(update, 1000 / 60); //intervalID should be defined in js file that calls this levelX.js
+
 
 		//mouse
 
@@ -485,6 +486,7 @@
 		basketAABB.upperBound = new b2Vec2(13.5, 9);
 		var bodies = [];
 		var gameOver = false;
+		
 		function update() {
 
 			if(isMouseDown && (!mouseJoint)) {
@@ -534,7 +536,7 @@
 						bodies.push(fixture.GetBody());
 					
 					if(bodies.length >= 3 && !gameOver) {
-						$( "#popup" ).popup( "open" );
+						levelFinished();
 						gameOver = true;
 					}
 					return true;
@@ -567,7 +569,7 @@
 		}
 
 
-	};
+	}
 
 
 
