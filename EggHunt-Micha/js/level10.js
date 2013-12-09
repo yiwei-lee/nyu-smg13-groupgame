@@ -1,4 +1,6 @@
 function level10() {
+	var levelNumber = 10;
+	
 	var   b2Vec2 = Box2D.Common.Math.b2Vec2,  	
 	b2AABB = Box2D.Collision.b2AABB,	
 	b2BodyDef = Box2D.Dynamics.b2BodyDef,	
@@ -294,6 +296,7 @@ function level10() {
 	// collision detection
 	var destroy_list = [];
 	var colListener = new Box2D.Dynamics.b2ContactListener();
+	var collectedCandy = new Array("0","0","0");
 	
 	colListener.BeginContact = function(contact) {
 		 var fxA=contact.GetFixtureA();
@@ -302,48 +305,42 @@ function level10() {
 		 sB=fxB.IsSensor();
 		 if((sA && !sB) || (sB && !sA))	{
 			 if(sA && contact.GetFixtureB().GetBody() != frameBody)	{
-				 // $("#debug").append(contact.GetFixtureA().GetBody().GetUserData());
+
 				 destroy_list.push(contact.GetFixtureA().GetBody());
-				 // make collected candy colorfull
-				 var candyType = contact.GetFixtureA().GetBody().GetUserData();
-				 if(candyType == "bonbon") {
-					 $(".collectable1").each(function() {
-						  $( this ).attr("src", "img/bonbon.png");
-					 });
-				 } else if(candyType == "lolly") {
-					 $(".collectable2").each(function() {
-						  $( this ).attr("src", "img/lolly.png");
-					 });
-				 } else if(candyType == "drop") {
-					 $(".collectable3").each(function() {
-						  $( this ).attr("src", "img/drop.png");
-					 });
-				 } 
+
+				 // make collected candy colorful
+				 colorCandy(contact.GetFixtureA().GetBody().GetUserData());
 				 
 			 }
 			 else if(sB && contact.GetFixtureA().GetBody() != frameBody) {
-				 // $("#debug").append(contact.GetFixtureB().GetBody().GetUserData());
+
 				 destroy_list.push(contact.GetFixtureB().GetBody());
-				// make collected candy colorfull
-				 var candyType = contact.GetFixtureB().GetBody().GetUserData();
-				 if(candyType == "bonbon") {
-					 $(".collectable1").each(function() {
-						  $( this ).attr("src", "img/bonbon.png");
-					 });
-				 } else if(candyType == "lolly") {
-					 $(".collectable2").each(function() {
-						  $( this ).attr("src", "img/lolly.png");
-					 });
-				 } else if(candyType == "drop") {
-						 $(".collectable3").each(function() {
-							  $( this ).attr("src", "img/drop.png");
-						 });
-					 } else {
-				 }
+
+				 // make collected candy colorful
+				 colorCandy(contact.GetFixtureB().GetBody().GetUserData());
 			 }
 		 }
 	 }	
 	world.SetContactListener(colListener);
+
+	function colorCandy(candyType) {
+		if(candyType == "bonbon") {
+			 $(".collectable1").each(function() {
+				  $( this ).attr("src", "img/bonbon.png");
+				  collectedCandy[0] = "1";
+			 });
+		 } else if(candyType == "lolly") {
+			 $(".collectable2").each(function() {
+				  $( this ).attr("src", "img/lolly.png");
+				  collectedCandy[1] = "1";
+			 });
+		 } else if(candyType == "drop") {
+				 $(".collectable3").each(function() {
+					  $( this ).attr("src", "img/drop.png");
+					  collectedCandy[2] = "1";
+				 });
+		 } 
+	}
 	
 	//update
 	var basketAABB = new b2AABB;
@@ -400,7 +397,9 @@ function level10() {
 					bodies.push(fixture.GetBody());
 				
 				if(bodies.length >= 3 && !gameOver) {
-					$( "#popup" ).popup( "open" );
+					levelFinished();
+					saveCollectedCandy();
+					
 					gameOver = true;
 				}
 				return true;
@@ -409,6 +408,18 @@ function level10() {
 		return true;
 	}
 
+	function saveCollectedCandy() {
+		var collectedCandyString = localStorage.collectedCandy;
+		if(collectedCandyString != null) {
+			var collectedCandyAllLevels = JSON.parse(collectedCandyString);
+		}
+		else {
+			var collectedCandyAllLevels = new Array();
+		}
+		collectedCandyAllLevels[levelNumber-1] = JSON.stringify(collectedCandy);
+		localStorage.collectedCandy = JSON.stringify(collectedCandyAllLevels);
+	}
+    
 	//helpers
 
 	//http://js-tut.aardon.de/js-tut/tutorial/position.html

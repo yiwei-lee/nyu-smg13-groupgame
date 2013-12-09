@@ -73,7 +73,7 @@ function menu() {
 //load the javascript file and the description of the level and execute the javascript file
 function loadLevel ( level ) {
 	resetCanvas();
-	//level = 8; //for debugging
+	//level = 1; //for debugging
 	var url = "js/level" + level + ".js";
 	
 	switch(level)
