@@ -1,22 +1,38 @@
-html, body {
-  width:  100%;
-  height: 100%;
-  margin: 0px;
-}
-
-table {
+#contenttable {
 	margin: 40px auto;
 }
 
-img {
+#contenttable img {
 	margin:10px;
 }
 
-table td {2
+#contenttable td {
 	vertical-align:top;	
 	text-align:center
 }
 
 .txt {
-	text-align:center
+	text-align:center;
+	font-size:12pt
+}
+
+#leveltable {
+	margin: 20px auto;
+}
+
+.leveldiv {
+	margin: 10px;
+}
+
+.candydiv {
+	margin-top: 5px;
+}
+
+.candyimg {
+  margin: 0px;
+  padding: 0px;
+}
+
+.gobackbutton {
+	padding-top: 20px;
 }

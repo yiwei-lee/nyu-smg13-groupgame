@@ -1,5 +1,5 @@
-function level4() {
-	var levelNumber = 4;
+function level2() {
+	var levelNumber = 2;
 	
 	var   b2Vec2 = Box2D.Common.Math.b2Vec2,  	
 	b2AABB = Box2D.Collision.b2AABB,	
@@ -28,10 +28,10 @@ function level4() {
 	fixDef.restitution = 0.2;
 
 	var bodyDef = new b2BodyDef;
-
+	
 	var width = $("#canvas").width();
 	var height = $("#canvas").height();
-	var SCALE = 50.0;
+	var SCALE = 50.0;	
 
 	// create floor ceiling and walls
 	bodyDef.type = b2Body.b2_staticBody;
@@ -51,64 +51,109 @@ function level4() {
 	bodyDef.position.Set(width / SCALE + 1, height / SCALE / 2);
 	world.CreateBody(bodyDef).CreateFixture(fixDef);
 
-	//create basket
+	fixDef.filter.groupIndex = 1;
 	fixDef.shape = new b2PolygonShape;
-	fixDef.shape.SetAsBox(2, 0.25);
-	bodyDef.position.Set(14, 4.5);
-	var body1 = world.CreateBody(bodyDef);
-	body1.CreateFixture(fixDef); 
-	var center = new b2Vec2(-2.2,-0.5);
-	var angle = 0.75 * b2Settings.b2_pi;
-	fixDef.shape.SetAsOrientedBox(0.25, 0.5, center, angle);
-	body1.CreateFixture(fixDef);
+	var vertices = [];
+	vertices.push(new b2Vec2(0.04, 2.04));
+	vertices.push(new b2Vec2(3.04, 2.18));
+	vertices.push(new b2Vec2(4.08, 3.68));
+	vertices.push(new b2Vec2(0, 8));
+	fixDef.shape.SetAsVector(vertices, vertices.count);
+	bodyDef.position.Set(0,0);
+	world.CreateBody(bodyDef).CreateFixture(fixDef);
 
-	//create catapult
+	var vertices = [];
+	vertices.push(new b2Vec2(0.02, 9.04));
+	vertices.push(new b2Vec2(4.56, 4.08));
+	vertices.push(new b2Vec2(7.52, 1.7));
+	vertices.push(new b2Vec2(8.2, 6.5));
+	vertices.push(new b2Vec2(5.96, 9.04));
+	fixDef.shape.SetAsVector(vertices, vertices.count);
+	bodyDef.position.Set(0,0);
+	world.CreateBody(bodyDef).CreateFixture(fixDef);
+
+	var vertices = [];
+	vertices.push(new b2Vec2(6.8, 9.48));
+	vertices.push(new b2Vec2(13.04, 1.7));
+	vertices.push(new b2Vec2(14.44, 9.78));
+	fixDef.shape.SetAsVector(vertices, vertices.count);
+	bodyDef.position.Set(0,0);
+	world.CreateBody(bodyDef).CreateFixture(fixDef);
+
+	// create the bolts
+	bodyDef.type = b2Body.b2_staticBody;
+	fixDef.shape = new b2PolygonShape;
 	fixDef.shape.SetAsBox(0.01, 0.01);
-	bodyDef.position.Set(6.9, 7);
+	bodyDef.position.Set(3.8, 4.5);
 	var anchorBody = world.CreateBody(bodyDef);
-	anchorBody.CreateFixture(fixDef); 
+	anchorBody.CreateFixture(fixDef);
 
-	bodyDef.type = b2Body.b2_dynamicBody;
-	fixDef.shape = new b2PolygonShape;
-	fixDef.shape.SetAsBox(5, 0.25);
-	bodyDef.position.Set(6.9, 7);
-	var catapultBody = world.CreateBody(bodyDef);
-	catapultBody.CreateFixture(fixDef); 
-	var center = new b2Vec2(-5,-1);
-	var angle = 0; //0.5 * b2Settings.b2_pi;
-	fixDef.shape.SetAsOrientedBox(0.25, 1, center, angle);
-	catapultBody.CreateFixture(fixDef);
-	var center = new b2Vec2(-1,-1);
-	var angle = 0; //0.5 * b2Settings.b2_pi;
-	fixDef.shape.SetAsOrientedBox(0.25, 1, center, angle);
-	catapultBody.CreateFixture(fixDef);
-
-	var revJointDef = new b2RevoluteJointDef;
-	revJointDef.bodyA = anchorBody;
-	revJointDef.bodyB = catapultBody;
-	revJointDef.anchor = new b2Vec2(6.9, 7);
-	revJointDef.collideConnected = false;
-	revJointDef.maxMotorTorque = 50.0; // motor is to have friction in the joint
-	revJointDef.motorSpeed = 0.0;
-	revJointDef.enableMotor = true;
-	var revJoint = world.CreateJoint(revJointDef);
-
-	// create the circles
 	fixDef.filter.groupIndex = 1;
 	bodyDef.type = b2Body.b2_dynamicBody;
+	fixDef.shape = new b2PolygonShape;
+	var center = new b2Vec2(0,0);
+	var angle = 0.5 * b2Settings.b2_pi;
+	fixDef.shape.SetAsOrientedBox(0.25, 1, center, angle);
+	bodyDef.position.Set(3.32, 5.04);
+	var body1 = world.CreateBody(bodyDef);
+	body1.CreateFixture(fixDef);
+
+	def = new Box2D.Dynamics.Joints.b2PrismaticJointDef();
+	def.bodyA = anchorBody;
+	def.bodyB = body1;
+	def.localAxisA = new b2Vec2(0.1,-0.1);
+	def.referenceAngle = 0.75 * b2Settings.b2_pi;
+	def.localAnchorA = new b2Vec2(0,0);
+	def.localAnchorB = new b2Vec2(0,0);
+	def.enableLimit = true;
+	def.lowerTranslation = -0.1;
+	def.upperTranslation = 0.1; 
+	var joint = world.CreateJoint(def);
+
+	bodyDef.type = b2Body.b2_staticBody;
+	fixDef.shape = new b2PolygonShape;
+	fixDef.shape.SetAsBox(0.01, 0.01);
+	bodyDef.position.Set(7.46, 8.02);
+	var anchorBody = world.CreateBody(bodyDef);
+	anchorBody.CreateFixture(fixDef);
+
+	fixDef.filter.groupIndex = 1;
+	bodyDef.type = b2Body.b2_dynamicBody;
+	fixDef.shape = new b2PolygonShape;
+	var center = new b2Vec2(0,0);
+	var angle = 0.5 * b2Settings.b2_pi;
+	fixDef.shape.SetAsOrientedBox(0.25, 1, center, angle);
+	bodyDef.position.Set(7.62, 7.92);
+	var body1 = world.CreateBody(bodyDef);
+	body1.CreateFixture(fixDef);
+
+	def = new Box2D.Dynamics.Joints.b2PrismaticJointDef();
+	def.bodyA = anchorBody;
+	def.bodyB = body1;
+	def.localAxisA = new b2Vec2(0.1,-0.1);
+	def.referenceAngle = 0.73 * b2Settings.b2_pi;
+	def.localAnchorA = new b2Vec2(0,0);
+	def.localAnchorB = new b2Vec2(0,0);
+	def.enableLimit = true;
+	def.lowerTranslation = -0.1;
+	def.upperTranslation = 0.1; 
+	var joint = world.CreateJoint(def);
+	
+	// create the circles
+	bodyDef.type = b2Body.b2_dynamicBody;
 	fixDef.shape = new b2CircleShape(0.5);//radius
-	bodyDef.position.Set(3.5, 1.5);
+	bodyDef.position.Set(0.42, 1.56);
 	var circleBody0 = world.CreateBody(bodyDef);
 	circleBody0.CreateFixture(fixDef);
 
-	bodyDef.position.Set(3.5, 3.5);
+	bodyDef.position.Set(1.62, 1.56);
 	var circleBody1 = world.CreateBody(bodyDef);
 	circleBody1.CreateFixture(fixDef);
 
-	bodyDef.position.Set(3.5, 4.5);
+	bodyDef.position.Set(2.6, 1.6);
 	var circleBody2 = world.CreateBody(bodyDef);
 	circleBody2.CreateFixture(fixDef);
-
+	
 	//create the candy
 	fixDef.isSensor = true;
 	//bonbon
@@ -116,7 +161,7 @@ function level4() {
 	bodyDef.type = b2Body.b2_staticBody;
 	fixDef.shape = new b2PolygonShape;
 	fixDef.shape.SetAsBox(0.3, 0.2);
-	bodyDef.position.Set(10.5, 7.5);
+	bodyDef.position.Set(10.36, 2.96);
 	var bonbon = world.CreateBody(bodyDef);
 	bonbon.CreateFixture(fixDef); 
 	var vertices = [];
@@ -135,7 +180,7 @@ function level4() {
 	//lolly
 	bodyDef.userData = 'lolly';	
 	fixDef.shape = new b2CircleShape(0.25);
-	bodyDef.position.Set(8.5, 0.75);
+	bodyDef.position.Set(8.5, 2.54);
 	var lolly = world.CreateBody(bodyDef);
 	lolly.CreateFixture(fixDef);
 	fixDef.shape = new b2PolygonShape;
@@ -147,11 +192,12 @@ function level4() {
 	//drop
 	bodyDef.userData = 'drop';	
 	fixDef.shape = new b2CircleShape(0.3);
-	bodyDef.position.Set(2.62, 1.92);
+	bodyDef.position.Set(14.04, 2.64);
 	var drop = world.CreateBody(bodyDef);
 	drop.CreateFixture(fixDef);
 	fixDef.isSensor = false;
-
+	
+	
 	//setup debug draw
 	var debugDraw = new b2DebugDraw();
 	debugDraw.SetSprite(document.getElementById("canvas").getContext("2d"));
@@ -162,7 +208,81 @@ function level4() {
 	world.SetDebugDraw(debugDraw);
 
 	intervalID = window.setInterval(update, 1000 / 60); //intervalID should be defined in js file that calls this levelX.js
+	
+	var destroy_list = [];
+	// collision detection
+	var colListener = new Box2D.Dynamics.b2ContactListener();
+	var collectedCandy = new Array("0","0","0");
+	//var listener = new Box2D.Dynamics.b2ContactListener;
+	colListener.BeginContact = function(contact) {
+		 var fxA=contact.GetFixtureA();
+		 var fxB=contact.GetFixtureB();
+		 sA=fxA.IsSensor();
+		 sB=fxB.IsSensor();
+		 if((sA && !sB) || (sB && !sA))	{
+			 if(sA)	{
 
+				 destroy_list.push(contact.GetFixtureA().GetBody());
+
+				 // make collected candy colorful
+				 colorCandy(contact.GetFixtureA().GetBody().GetUserData());
+				 
+			 }
+			 else	{
+
+				 destroy_list.push(contact.GetFixtureB().GetBody());
+
+				 // make collected candy colorful
+				 colorCandy(contact.GetFixtureB().GetBody().GetUserData());
+			 }
+		 }
+	 }	
+	var basketAABB = new b2AABB;
+	basketAABB.lowerBound = new b2Vec2(13.5, 6);
+	basketAABB.upperBound = new b2Vec2(16, 9);
+	var bodies = [];
+	var gameOver = false;
+    colListener.PostSolve = function (contact, impulse) {
+
+ 		world.QueryAABB(testIfEggsAreInBasket, basketAABB);
+ 
+    };
+    world.SetContactListener(colListener);
+
+	
+	
+    function testIfEggsAreInBasket(fixture) {
+    	
+		if(fixture.GetBody().GetType() != b2Body.b2_staticBody) {
+			
+			if(fixture.GetBody() == circleBody0 || fixture.GetBody() == circleBody1 || fixture.GetBody() == circleBody2) {
+				if(bodies.indexOf(fixture.GetBody()) <= -1)
+					bodies.push(fixture.GetBody());
+				
+				if(bodies.length >= 3 && !gameOver) {
+					levelFinished();
+					saveCollectedCandy();
+					
+					gameOver = true;
+				}
+				return true;
+			}
+		}
+		return true;
+	}
+
+	function saveCollectedCandy() {
+		var collectedCandyString = localStorage.collectedCandy;
+		if(collectedCandyString != null) {
+			var collectedCandyAllLevels = JSON.parse(collectedCandyString);
+		}
+		else {
+			var collectedCandyAllLevels = new Array();
+		}
+		collectedCandyAllLevels[levelNumber-1] = JSON.stringify(collectedCandy);
+		localStorage.collectedCandy = JSON.stringify(collectedCandyAllLevels);
+	}
+    
 	//mouse
 
 	var mouseX, mouseY, mousePVec, isMouseDown, selectedBody, mouseJoint;
@@ -240,61 +360,8 @@ function level4() {
 			//alert("MOve - Touch x:" + touch.pageX + ", y:" + touch.pageY);
 		}, false);
 
-	// collision detection
-	var destroy_list = [];
-	var colListener = new Box2D.Dynamics.b2ContactListener();
-	var collectedCandy = new Array("0","0","0");
-	
-	colListener.BeginContact = function(contact) {
-		 var fxA=contact.GetFixtureA();
-		 var fxB=contact.GetFixtureB();
-		 sA=fxA.IsSensor();
-		 sB=fxB.IsSensor();
-		 if((sA && !sB) || (sB && !sA))	{
-			 if(sA)	{
-				 
-				 destroy_list.push(contact.GetFixtureA().GetBody());
-
-				 // make collected candy colorful
-				 colorCandy(contact.GetFixtureA().GetBody().GetUserData());
-				 
-			 }
-			 else	{
-				 
-				 destroy_list.push(contact.GetFixtureB().GetBody());
-
-				 // make collected candy colorful
-				 colorCandy(contact.GetFixtureB().GetBody().GetUserData());
-			 }
-		 }
-	 }	
-	world.SetContactListener(colListener);
-
-	function colorCandy(candyType) {
-		if(candyType == "bonbon") {
-			 $(".collectable1").each(function() {
-				  $( this ).attr("src", "img/bonbon.png");
-				  collectedCandy[0] = "1";
-			 });
-		 } else if(candyType == "lolly") {
-			 $(".collectable2").each(function() {
-				  $( this ).attr("src", "img/lolly.png");
-				  collectedCandy[1] = "1";
-			 });
-		 } else if(candyType == "drop") {
-				 $(".collectable3").each(function() {
-					  $( this ).attr("src", "img/drop.png");
-					  collectedCandy[2] = "1";
-				 });
-		 } 
-	}
-	
 	//update
-	var basketAABB = new b2AABB;
-	basketAABB.lowerBound = new b2Vec2(12.34, 2.9);
-	basketAABB.upperBound = new b2Vec2(16, 4.6);
-	var bodies = [];
-	var gameOver = false;
+
 	function update() {
 
 		if(isMouseDown && (!mouseJoint)) {
@@ -323,49 +390,15 @@ function level4() {
 		world.Step(1 / 60, 10, 10);
 		world.DrawDebugData();
 		world.ClearForces();
-
-		world.QueryAABB(testIfEggsAreInBasket, basketAABB);
- 
+		
 		// Destroy all bodies in destroy_list
 		for (var i in destroy_list) {
 			world.DestroyBody(destroy_list[i]);
 		}
 		// Reset the array
 		destroy_list.length = 0;
-    };
+	};
 
-    function testIfEggsAreInBasket(fixture) {
-    	//$("#debug").append("<br/>Here" + fixture.GetBody().GetWorldCenter().x + "_" +  fixture.GetBody().GetWorldCenter().y);
-		if(fixture.GetBody().GetType() != b2Body.b2_staticBody) {
-			
-			if(fixture.GetBody() == circleBody0 || fixture.GetBody() == circleBody1 || fixture.GetBody() == circleBody2) {
-				if(bodies.indexOf(fixture.GetBody()) <= -1)
-					bodies.push(fixture.GetBody());
-				
-				if(bodies.length >= 2 && !gameOver) {
-					levelFinished();
-					saveCollectedCandy();
-					
-					gameOver = true;
-				}
-				return true;
-			}
-		}
-		return true;
-	}
-
-	function saveCollectedCandy() {
-		var collectedCandyString = localStorage.collectedCandy;
-		if(collectedCandyString != null) {
-			var collectedCandyAllLevels = JSON.parse(collectedCandyString);
-		}
-		else {
-			var collectedCandyAllLevels = new Array();
-		}
-		collectedCandyAllLevels[levelNumber-1] = JSON.stringify(collectedCandy);
-		localStorage.collectedCandy = JSON.stringify(collectedCandyAllLevels);
-	}
-    
 	//helpers
 
 	//http://js-tut.aardon.de/js-tut/tutorial/position.html

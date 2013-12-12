@@ -7,12 +7,12 @@ function colorCollectedCandy() {
 	if(collectedCandyString != null) {
 		var collectedCandy = JSON.parse(collectedCandyString);
 		var levelCandy;
-		alert(collectedCandy.length);
+		//alert(collectedCandy.length);
 		for (var i = 0; i < collectedCandy.length; i++) {
 			if(collectedCandy[i] == null) 
 				continue;
 			levelCandy = JSON.parse(collectedCandy[i]);
-			alert(levelCandy[0] + ", " +levelCandy[1] + ", " +levelCandy[2] );
+			//alert(levelCandy[0] + ", " +levelCandy[1] + ", " +levelCandy[2] );
 			//alert(levelCandy[0] == "1");
 			for(var j = 0; j < 3; j++) {
 				if(levelCandy[j] == "1") {
