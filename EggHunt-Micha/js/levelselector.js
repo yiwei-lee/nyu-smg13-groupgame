@@ -19,13 +19,13 @@ function colorCollectedCandy() {
 					switch(j)
 					{
 					  case 0:
-						$("#candy"+(i+1)+"1").attr("src", "img/bonbon.png");
+						$("#candy"+(i+1)+"1").attr("src", "img/theme1/collectible1.png");
 					    break;
 					  case 1:
-						$("#candy"+(i+1)+"2").attr("src", "img/lolly.png");
+						$("#candy"+(i+1)+"2").attr("src", "img/theme1/collectible2.png");
 					    break;
 					  case 2:
-						$("#candy"+(i+1)+"3").attr("src", "img/drop.png");
+						$("#candy"+(i+1)+"3").attr("src", "img/theme1/collectible3.png");
 					    break;
 					  default:
 					    alert("Error could not load candy" + j);
@@ -35,13 +35,13 @@ function colorCollectedCandy() {
 					switch(j)
 					{
 					  case 0:
-						$("#candy"+(i+1)+"1").attr("src", "img/bonbon_bw.png");
+						$("#candy"+(i+1)+"1").attr("src", "img/theme1/collectible1_bw.png");
 					    break;
 					  case 1:
-						$("#candy"+(i+1)+"2").attr("src", "img/lolly_bw.png");
+						$("#candy"+(i+1)+"2").attr("src", "img/theme1/collectible2_bw.png");
 					    break;
 					  case 2:
-						$("#candy"+(i+1)+"3").attr("src", "img/drop_bw.png");
+						$("#candy"+(i+1)+"3").attr("src", "img/theme1/collectible3_bw.png");
 					    break;
 					  default:
 					    alert("Error could not load candy" + j);
