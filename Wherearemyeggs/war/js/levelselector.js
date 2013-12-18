@@ -1,5 +1,5 @@
 $( document ).delegate("#levelselectorpage", "pageshow", function() {	
-	localStorage.currentTheme = ""+4; //will be set in themeselector
+	localStorage.currentTheme = ""+5; //will be set in themeselector
 	var currentTheme = parseInt(localStorage.currentTheme); 
 	colorCollectedCandy(currentTheme);
 });
@@ -18,22 +18,22 @@ function colorCollectedCandy( theme ) {
 		collectedString = "";
 	    break;
 	  case 4:
-			collectedString = localStorage.daniel_collectedCandy = JSON.stringify(collectedCandyAllLevels);
+		collectedString = localStorage.daniel_collectedCandy;
 	    break;
 	  case 5:
-			collectedString = localStorage.collectedDecoration;
+		collectedString = localStorage.collectedDecoration;
 		break;
 	  case 6:
-			collectedString = "";
+		collectedString = "";
 	    break;
 	  default:
-	    alert("Error could not load candy" + j);
+	    alert("Error could not load candy" + theme);
 	}
-	alert(collectedCandyString);
-	if(collectedCandyString != null) {
-		var collectedCandy = JSON.parse(collectedCandyString);
+	
+	if(collectedString != null && collectedString != "") {
+		var collectedCandy = JSON.parse(collectedString);
 		var levelCandy;
-		//alert(collectedCandy.length);
+		 
 		for (var i = 0; i < collectedCandy.length; i++) {
 			if(collectedCandy[i] == null) 
 				continue;
