@@ -5,7 +5,30 @@ $( document ).delegate("#levelselectorpage", "pageshow", function() {
 });
 
 function colorCollectedCandy( theme ) {
-	var collectedCandyString = localStorage.collectedCandy;
+	var collectedString;
+	switch(theme)
+	{
+	  case 1:
+		collectedString = localStorage.collectedCandy;
+	    break;
+	  case 2:
+		collectedString = "";
+	    break;
+	  case 3:
+		collectedString = "";
+	    break;
+	  case 4:
+			collectedString = localStorage.daniel_collectedCandy = JSON.stringify(collectedCandyAllLevels);
+	    break;
+	  case 5:
+			collectedString = localStorage.collectedDecoration;
+		break;
+	  case 6:
+			collectedString = "";
+	    break;
+	  default:
+	    alert("Error could not load candy" + j);
+	}
 	alert(collectedCandyString);
 	if(collectedCandyString != null) {
 		var collectedCandy = JSON.parse(collectedCandyString);
