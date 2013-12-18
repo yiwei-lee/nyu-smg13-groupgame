@@ -436,12 +436,12 @@ function level5(){
     	 if(bodyA.elementType == "bomb"){
      		// alert("game over")
      		 physics.destroyBody(egg.body);
-     		 alert("Egg Destroyed! Game Over");
+     		eggDestroyed();
      	 }
     	 if(bodyA.elementType == "ground"){
       		// alert("game over")
       		 physics.destroyBody(egg.body);
-      		alert("Egg Destroyed! Game Over");
+      		eggDestroyed();
       	 }
 
         

@@ -4,7 +4,7 @@
 function level1() {
 	console.log(document.location.pathname);
 	var image = new Image();
-    image.src = "./images/basket.jpeg";
+    image.src = "./img/theme6/basket.jpeg";
     
 	var   b2Vec2 = Box2D.Common.Math.b2Vec2
     ,  b2AABB = Box2D.Collision.b2AABB

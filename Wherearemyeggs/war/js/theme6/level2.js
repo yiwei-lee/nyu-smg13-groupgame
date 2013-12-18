@@ -1,10 +1,11 @@
 function level2(){
 	var image = new Image();
-    image.src = "basket.jpeg";
+    image.src = "img/theme6/basket.jpeg";
 	canvas = document.getElementById("canvas");
 	context = canvas.getContext( '2d' );
 	var image = new Image();
-    image.src = "basket.jpeg";
+    image.src = "img/theme6/basket.jpeg";
+    
     
     var mouseX, mouseY, mousePVec, isMouseDown, selectedBody, mouseJoint;
    

@@ -52,7 +52,24 @@
 					<input type="button" value="Menu" onclick="menu();" />
 				</div>
 		</div>
-		
+	
+	                <div data-role="popup" id="popupThemeComplete" data-transition="pop">
+                        <div data-role="header" role="banner" style="width:400px">
+                                <h1 class="ui-title" role="heading" aria-level="1">Congratulations!</h1>
+                                <h1 class="ui-title" role="heading" aria-level="1">Theme Completed!</h1>
+                        </div>
+                        <div data-role="content" role="main">
+                                        <div style="text-align: center">
+                                                <div>
+                                                        <img  src="img/confetti.png" height="100" width="100" />
+                                                </div>
+                                        </div>
+                                        <input type="button" value="Select Another Theme" data-theme="b" onclick="themeSelector();" />    
+                                        <input type="button" value="Reload Level" onclick="reloadPage();" />
+                                        <input type="button" value="Menu" onclick="menu();" />
+                                </div>
+                </div>
+                	
 		<div id="debug" style="font-size:20pt"></div>
 		
 		<script type="text/javascript" src="js/load.js"></script>

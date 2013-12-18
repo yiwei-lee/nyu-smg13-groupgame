@@ -121,6 +121,10 @@ function loadLevel ( level, theme ) {
 		var width = levelInfo[theme-1][level-1][1];
 		var height = levelInfo[theme-1][level-1][2];
 		
+		if(canvas== undefined){
+			var canvas = document.getElementById('canvas');
+		}
+		
 		var context = canvas.getContext('2d');
 		context.canvas.width = width;
 		context.canvas.height = height;
