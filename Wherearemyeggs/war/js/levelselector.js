@@ -101,11 +101,9 @@ function goToLevel(i) {
 	);
 }
 
-function goToThemeSelector(i) {
-	localStorage.currentLevel = ""+i;
-	var currentTheme = parseInt(localStorage.currentTheme); 
+function goToThemeSelector() {
 	$.mobile.changePage(
-			"theme" + currentTheme + "level.html",
+			"themeselector.html#themeselectpage",
 		    {
 		      transition: 	'pop',
 		      reverse: 		true
