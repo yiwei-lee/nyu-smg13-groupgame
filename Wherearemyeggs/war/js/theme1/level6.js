@@ -88,6 +88,7 @@ function level6() {
 	var anchorBody = world.CreateBody(bodyDef);
 	anchorBody.CreateFixture(fixDef);
 
+	bodyDef.userData = 'bolt';
 	fixDef.filter.groupIndex = 1;
 	bodyDef.type = b2Body.b2_dynamicBody;
 	fixDef.shape = new b2PolygonShape;
@@ -97,6 +98,7 @@ function level6() {
 	bodyDef.position.Set(3.32, 5.04);
 	var body1 = world.CreateBody(bodyDef);
 	body1.CreateFixture(fixDef);
+	bodyDef.userData = '';
 
 	def = new Box2D.Dynamics.Joints.b2PrismaticJointDef();
 	def.bodyA = anchorBody;
@@ -117,6 +119,7 @@ function level6() {
 	var anchorBody = world.CreateBody(bodyDef);
 	anchorBody.CreateFixture(fixDef);
 
+	bodyDef.userData = 'bolt';
 	fixDef.filter.groupIndex = 1;
 	bodyDef.type = b2Body.b2_dynamicBody;
 	fixDef.shape = new b2PolygonShape;
@@ -126,7 +129,8 @@ function level6() {
 	bodyDef.position.Set(7.62, 7.92);
 	var body1 = world.CreateBody(bodyDef);
 	body1.CreateFixture(fixDef);
-
+	bodyDef.userData = '';
+	
 	def = new Box2D.Dynamics.Joints.b2PrismaticJointDef();
 	def.bodyA = anchorBody;
 	def.bodyB = body1;
@@ -438,7 +442,22 @@ function level6() {
 	              fromCenter: true
 	          })
 	          .restoreCanvas();
-	       }         
+	       } else if(b.GetUserData() == 'bolt') {
+	    	  $("#canvas")
+	          .rotateCanvas({
+	              x: pos.x * SCALE, y: pos.y * SCALE,
+	              rotate: angle
+	          })
+	          .drawImage({
+	              source: 'img/theme1/bolt.png',
+	              x: pos.x * SCALE, y: pos.y * SCALE,
+	              height: 35,
+	              width: 105,
+	              fromCenter: true
+	          })
+	          .restoreCanvas();
+	          
+	       }
 		}
 		
 		

@@ -52,6 +52,7 @@ function level7() {
 	world.CreateBody(bodyDef).CreateFixture(fixDef);
 
 	//create basket
+	bodyDef.userData = 'basket';
 	fixDef.shape = new b2PolygonShape;
 	fixDef.shape.SetAsBox(2, 0.25);
 	bodyDef.position.Set(14, 4.5);
@@ -61,13 +62,15 @@ function level7() {
 	var angle = 0.75 * b2Settings.b2_pi;
 	fixDef.shape.SetAsOrientedBox(0.25, 0.5, center, angle);
 	body1.CreateFixture(fixDef);
-
+	bodyDef.userData = '';
+	
 	//create catapult
 	fixDef.shape.SetAsBox(0.01, 0.01);
 	bodyDef.position.Set(6.9, 7);
 	var anchorBody = world.CreateBody(bodyDef);
 	anchorBody.CreateFixture(fixDef); 
 
+	bodyDef.userData = 'catapult';
 	bodyDef.type = b2Body.b2_dynamicBody;
 	fixDef.shape = new b2PolygonShape;
 	fixDef.shape.SetAsBox(5, 0.25);
@@ -82,7 +85,8 @@ function level7() {
 	var angle = 0; //0.5 * b2Settings.b2_pi;
 	fixDef.shape.SetAsOrientedBox(0.25, 1, center, angle);
 	catapultBody.CreateFixture(fixDef);
-
+	bodyDef.userData = '';
+	
 	var revJointDef = new b2RevoluteJointDef;
 	revJointDef.bodyA = anchorBody;
 	revJointDef.bodyB = catapultBody;
@@ -343,18 +347,42 @@ function level7() {
 	          })
 	          .restoreCanvas();
 	       } else if(b.GetUserData() == 'bonbon') {
-	    	  $("#canvas")
-	          .rotateCanvas({
-	              x: pos.x * SCALE, y: pos.y * SCALE,
-	              rotate: angle
-	          })
-	          .drawImage({
-	              source: 'img/theme1/bonbon_red.png',
-	              x: pos.x * SCALE, y: pos.y * SCALE,
-	              fromCenter: true
-	          })
-	          .restoreCanvas();
-	       }         
+		    	  $("#canvas")
+		          .rotateCanvas({
+		              x: pos.x * SCALE, y: pos.y * SCALE,
+		              rotate: angle
+		          })
+		          .drawImage({
+		              source: 'img/theme1/bonbon_red.png',
+		              x: pos.x * SCALE, y: pos.y * SCALE,
+		              fromCenter: true
+		          })
+		          .restoreCanvas();
+		       } else if(b.GetUserData() == 'basket') {
+			    	  $("#canvas")
+			          .rotateCanvas({
+			              x: pos.x * SCALE, y: pos.y * SCALE,
+			              rotate: angle
+			          })
+			          .drawImage({
+			              source: 'img/theme1/basketX.png',
+			              x: pos.x * SCALE-20, y: pos.y * SCALE-20,
+			              fromCenter: true
+			          })
+			          .restoreCanvas();
+			       } else if(b.GetUserData() == 'catapult') {
+				    	  $("#canvas")
+				          .rotateCanvas({
+				              x: pos.x * SCALE, y: pos.y * SCALE,
+				              rotate: angle
+				          })
+				          .drawImage({
+				              source: 'img/theme1/catapult.png',
+				              x: pos.x * SCALE-6, y: pos.y * SCALE-44,
+				              fromCenter: true
+				          })
+				          .restoreCanvas();
+				       }         
 		}
 		
 

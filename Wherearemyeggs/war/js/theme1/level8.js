@@ -408,7 +408,7 @@ function level8() {
 	              fromCenter: true
 	          })
 	          .restoreCanvas();
-	       }         
+	       }  
 		}
 		
 

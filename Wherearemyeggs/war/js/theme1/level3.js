@@ -74,6 +74,7 @@ function level3() {
 	world.CreateBody(bodyDef).CreateFixture(fixDef);
 
 	//create basket
+	bodyDef.userData = 'basket1';
 	fixDef.shape = new b2PolygonShape;
 	fixDef.shape.SetAsBox(1, 0.125);
 	bodyDef.position.Set(15, 2.5);
@@ -84,6 +85,7 @@ function level3() {
 	fixDef.shape.SetAsOrientedBox(0.125, 0.5, center, angle);
 	body1.CreateFixture(fixDef);
 	
+	bodyDef.userData = 'basket2';
 	fixDef.shape = new b2PolygonShape;
 	fixDef.shape.SetAsBox(1.5, 0.125);
 	bodyDef.position.Set(14.5, 5);
@@ -94,6 +96,7 @@ function level3() {
 	fixDef.shape.SetAsOrientedBox(0.125, 0.5, center, angle);
 	body1.CreateFixture(fixDef);
 	
+	bodyDef.userData = 'basket3';
 	fixDef.shape = new b2PolygonShape;
 	fixDef.shape.SetAsBox(2, 0.125);
 	bodyDef.position.Set(14, 7.5);
@@ -103,6 +106,7 @@ function level3() {
 	var angle = 0.75 * b2Settings.b2_pi;
 	fixDef.shape.SetAsOrientedBox(0.125, 0.5, center, angle);
 	body1.CreateFixture(fixDef);
+	bodyDef.userData = '';
 
 	// create the bolts
 	bodyDef.type = b2Body.b2_staticBody;
@@ -112,6 +116,7 @@ function level3() {
 	var anchorBody = world.CreateBody(bodyDef);
 	anchorBody.CreateFixture(fixDef);
 
+	bodyDef.userData = 'bolt';
 	fixDef.filter.groupIndex = 1;
 	bodyDef.type = b2Body.b2_dynamicBody;
 	fixDef.shape = new b2PolygonShape;
@@ -121,7 +126,8 @@ function level3() {
 	bodyDef.position.Set(2.98, 4.9);
 	var body1 = world.CreateBody(bodyDef);
 	body1.CreateFixture(fixDef);
-
+	bodyDef.userData = '';
+	
 	def = new Box2D.Dynamics.Joints.b2PrismaticJointDef();
 	def.bodyA = anchorBody;
 	def.bodyB = body1;
@@ -402,7 +408,58 @@ function level3() {
 	              fromCenter: true
 	          })
 	          .restoreCanvas();
-	       }         
+	       } else if(b.GetUserData() == 'bolt') {
+	    	  $("#canvas")
+	          .rotateCanvas({
+	              x: pos.x * SCALE, y: pos.y * SCALE,
+	              rotate: angle
+	          })
+	          .drawImage({
+	              source: 'img/theme1/bolt.png',
+	              x: pos.x * SCALE, y: pos.y * SCALE,
+	              height: 40,
+	              width: 105,
+	              fromCenter: true
+	          })
+	          .restoreCanvas();
+	       } else if(b.GetUserData() == 'basket1') {
+	    	  $("#canvas")
+	          .rotateCanvas({
+	              x: pos.x * SCALE, y: pos.y * SCALE,
+	              rotate: angle
+	          })
+	          .drawImage({
+	              source: 'img/theme1/basket_small.png',
+	              x: pos.x * SCALE-18, y: pos.y * SCALE-15,
+	              fromCenter: true
+	          })
+	          .restoreCanvas();
+	       } else if(b.GetUserData() == 'basket2') {
+	    	  $("#canvas")
+	          .rotateCanvas({
+	              x: pos.x * SCALE, y: pos.y * SCALE,
+	              rotate: angle
+	          })
+	          .drawImage({
+	              source: 'img/theme1/basket_medium.png',
+	              x: pos.x * SCALE-18, y: pos.y * SCALE-15,
+	              fromCenter: true
+	          })
+	          .restoreCanvas();
+	       } else if(b.GetUserData() == 'basket3') {
+	    	  $("#canvas")
+	          .rotateCanvas({
+	              x: pos.x * SCALE, y: pos.y * SCALE,
+	              rotate: angle
+	          })
+	          .drawImage({
+	              source: 'img/theme1/basket_big.png',
+	              x: pos.x * SCALE-18, y: pos.y * SCALE-15,
+	              fromCenter: true
+	          })
+	          .restoreCanvas();
+	       } 
+	      
 		}
 		
 
