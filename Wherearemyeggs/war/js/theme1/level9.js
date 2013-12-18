@@ -87,7 +87,8 @@ function level9() {
 	bodyDef.type = b2Body.b2_dynamicBody;
 	fixDef.shape.SetAsBox(1.5, 1.5);
 	bodyDef.position.Set(2, 7);
-	world.CreateBody(bodyDef).CreateFixture(fixDef);
+	var companioncube = world.CreateBody(bodyDef);
+	companioncube.CreateFixture(fixDef);
 	
 	
 	// create the circles
@@ -250,7 +251,7 @@ function level9() {
 		 sA=fxA.IsSensor();
 		 sB=fxB.IsSensor();
 		 if((sA && !sB) || (sB && !sA))	{
-			 if(sA)	{
+			 if(sA && contact.GetFixtureB().GetBody() != companionCube)	{
 
 				 destroy_list.push(contact.GetFixtureA().GetBody());
 
@@ -258,7 +259,7 @@ function level9() {
 				 colorCandy(contact.GetFixtureA().GetBody().GetUserData(), collectedCandy);
 				 
 			 }
-			 else	{
+			 else if(sB && contact.GetFixtureA().GetBody() != companionCube) {
 
 				 destroy_list.push(contact.GetFixtureB().GetBody());
 
@@ -304,8 +305,59 @@ function level9() {
 		}
 
 		world.Step(1 / 60, 10, 10);
-		world.DrawDebugData();
 		world.ClearForces();
+		
+		$("#canvas").clearCanvas();
+		world.DrawDebugData();
+		for (b = world.GetBodyList() ; b; b = b.GetNext())
+		{
+	      var angle = b.GetAngle()*(180/Math.PI);
+	      var pos = b.GetPosition();
+	      
+	      // Using Images to display bodies
+	      if(b.GetUserData() == 'lolly') {
+	    	  $("#canvas")
+	          .rotateCanvas({
+	              x: pos.x * SCALE, y: pos.y * SCALE,
+	              rotate: angle
+	          })
+	          .drawImage({
+	              source: 'img/theme1/lolly_red.png',
+	              x: pos.x * SCALE-2.6, y: pos.y * SCALE+6.6,
+	              width: 150*(43/190),
+	              height: 43,
+	              fromCenter: true
+	          })
+	          .restoreCanvas();
+	       } else if(b.GetUserData() == 'drop') {
+	    	  $("#canvas")
+	          .rotateCanvas({
+	              x: pos.x * SCALE, y: pos.y * SCALE,
+	              rotate: angle
+	          })
+	          .drawImage({
+	              source: 'img/theme1/drop_red.png',
+	              x: pos.x * SCALE, y: pos.y * SCALE,
+	              width: 0.3 * 2 * 50+2,
+	              height: 0.3 * 2 * 50+2,
+	              fromCenter: true
+	          })
+	          .restoreCanvas();
+	       } else if(b.GetUserData() == 'bonbon') {
+	    	  $("#canvas")
+	          .rotateCanvas({
+	              x: pos.x * SCALE, y: pos.y * SCALE,
+	              rotate: angle
+	          })
+	          .drawImage({
+	              source: 'img/theme1/bonbon_red.png',
+	              x: pos.x * SCALE, y: pos.y * SCALE,
+	              fromCenter: true
+	          })
+	          .restoreCanvas();
+	       }         
+		}
+		
 
 		world.QueryAABB(testIfEggsAreInBasket, basketAABB);
  
@@ -326,7 +378,7 @@ function level9() {
 					bodies.push(fixture.GetBody());
 				
 				if(bodies.length >= 3 && !gameOver) {
-					levelFinished();
+					themeFinished();
 					saveCollectedCandy();
 					
 					gameOver = true;

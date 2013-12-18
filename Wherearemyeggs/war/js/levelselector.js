@@ -16,7 +16,7 @@ function colorCollectedCandy( theme ) {
 		collectedString = "";
 	    break;
 	  case 3:
-		collectedString = "";
+		collectedString = localStorage.yiwei_collectedCandy;
 	    break;
 	  case 4:
 		collectedString = localStorage.daniel_collectedCandy;
@@ -95,7 +95,8 @@ function goToLevel(i) {
 	$.mobile.changePage(
 			"theme" + currentTheme + "level.html",
 		    {
-		      transition: 'pop'
+		      transition: 'pop',
+		      reloadPage        : true
 		    }
 	);
 }

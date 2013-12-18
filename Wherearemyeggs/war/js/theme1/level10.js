@@ -38,127 +38,175 @@ function level10() {
 	fixDef.shape = new b2PolygonShape;
 
 	fixDef.shape.SetAsBox(width / SCALE / 2, 1);
-	bodyDef.position.Set(5, height / SCALE + 1);
+	bodyDef.position.Set(0.6, height / SCALE + 0.8);
 	world.CreateBody(bodyDef).CreateFixture(fixDef);
 
 	bodyDef.position.Set(width / SCALE / 2, -1);
 	world.CreateBody(bodyDef).CreateFixture(fixDef);
 
 	fixDef.shape.SetAsBox(1, height / SCALE / 2);
-	bodyDef.position.Set(-1, height / SCALE / 2);
+	bodyDef.position.Set(-0.5, height / SCALE / 2);
 	world.CreateBody(bodyDef).CreateFixture(fixDef);
 
 	bodyDef.position.Set(width / SCALE + 1, height / SCALE / 2);
 	world.CreateBody(bodyDef).CreateFixture(fixDef);
+
+	fixDef.shape.SetAsBox(0.25, 0.1);
+	bodyDef.position.Set(3.25,7);
+	world.CreateBody(bodyDef).CreateFixture(fixDef);
+
+	fixDef.shape.SetAsBox(0.25, 1.5);
+	bodyDef.position.Set(3.25,3);
+	world.CreateBody(bodyDef).CreateFixture(fixDef);
+
+	fixDef.shape.SetAsBox(1.5, 1.4);
+	bodyDef.position.Set(1.5,9-1.4);
+	world.CreateBody(bodyDef).CreateFixture(fixDef);
+
+	fixDef.shape.SetAsBox(0.25, 2.3);
+	bodyDef.position.Set(4.75,4.8);
+	world.CreateBody(bodyDef).CreateFixture(fixDef);
+
+
+	// fixDef.shape.SetAsBox(1.5, 1.4);
+	// bodyDef.position.Set(6.5,9-1.4);
+	// world.CreateBody(bodyDef).CreateFixture(fixDef);
 	
-	fixDef.shape.SetAsBox(6.5, 0.1);
-	bodyDef.position.Set(6.5,8.9);
-	world.CreateBody(bodyDef).CreateFixture(fixDef);
-
+	fixDef.filter.groupIndex = 1;
 	fixDef.shape = new b2PolygonShape;
 	var vertices = [];
-	vertices.push(new b2Vec2(0, 1.36));
-	vertices.push(new b2Vec2(5.76, 2.6));
-	vertices.push(new b2Vec2(5.76, 2.9));
-	vertices.push(new b2Vec2(0, 1.66));
+	vertices.push(new b2Vec2(3, 6.26));
+	vertices.push(new b2Vec2(0.1, 6.26));
+	vertices.push(new b2Vec2(0.16, 4.26));
+	fixDef.shape.SetAsVector(vertices, 3);
+	bodyDef.position.Set(0,0);
+	world.CreateBody(bodyDef).CreateFixture(fixDef);
+
+	fixDef.filter.groupIndex = 1;
+	fixDef.shape = new b2PolygonShape;
+	vertices = [];
+	vertices.push(new b2Vec2(5, 9));
+	vertices.push(new b2Vec2(5, 2.5));
+	vertices.push(new b2Vec2(5.1, 2.5));
+	vertices.push(new b2Vec2(6, 8));
+	fixDef.shape.SetAsVector(vertices, vertices.count);
+	bodyDef.position.Set(0,0);
+	world.CreateBody(bodyDef).CreateFixture(fixDef);
+
+	fixDef.filter.groupIndex = 1;
+	fixDef.shape = new b2PolygonShape;
+	vertices = [];
+	vertices.push(new b2Vec2(7.68, 6.76));
+	vertices.push(new b2Vec2(8.92, 9.04));
+	vertices.push(new b2Vec2(5, 9));
+	fixDef.shape.SetAsVector(vertices, vertices.count);
+	bodyDef.position.Set(0,0);
+	world.CreateBody(bodyDef).CreateFixture(fixDef);
+
+	fixDef.filter.groupIndex = 1;
+	fixDef.shape = new b2PolygonShape;
+	vertices = [];
+	vertices.push(new b2Vec2(11.24, 9.04));
+	vertices.push(new b2Vec2(12.66, 6.72));
+	vertices.push(new b2Vec2(15.94, 9.04));
+	fixDef.shape.SetAsVector(vertices, vertices.count);
+	bodyDef.position.Set(0,0);
+	world.CreateBody(bodyDef).CreateFixture(fixDef);
+
+	fixDef.filter.groupIndex = 1;
+	fixDef.shape = new b2PolygonShape;
+	vertices = [];
+	vertices.push(new b2Vec2(15.68, 9));
+	vertices.push(new b2Vec2(14.56, 8.04));
+	vertices.push(new b2Vec2(15.68, 0.16));
+	vertices.push(new b2Vec2(16.12, 0.02));
 	fixDef.shape.SetAsVector(vertices, vertices.count);
 	bodyDef.position.Set(0,0);
 	world.CreateBody(bodyDef).CreateFixture(fixDef);
 
 	fixDef.shape = new b2PolygonShape;
-	var vertices = [];
-	vertices.push(new b2Vec2(10.8, 4));
-	vertices.push(new b2Vec2(13.7, 4.6));
-	vertices.push(new b2Vec2(13.7, 4.9));
-	vertices.push(new b2Vec2(10.8, 4.3));
+	vertices = [];
+	vertices.push(new b2Vec2(3.14, 4.48));
+	vertices.push(new b2Vec2(0.1, 2.76));
+	vertices.push(new b2Vec2(0.16, 0.12));
+	vertices.push(new b2Vec2(3.2, 0.12));
 	fixDef.shape.SetAsVector(vertices, vertices.count);
 	bodyDef.position.Set(0,0);
 	world.CreateBody(bodyDef).CreateFixture(fixDef);
 
 	fixDef.shape = new b2PolygonShape;
-	var vertices = [];
-	vertices.push(new b2Vec2(0, 1.1));
-	vertices.push(new b2Vec2(4, 1.2));
-	vertices.push(new b2Vec2(4, 1.5));
-	vertices.push(new b2Vec2(0, 1.4));
-	fixDef.shape.SetAsVector(vertices, vertices.count);
-	bodyDef.position.Set(0,0);
-	world.CreateBody(bodyDef).CreateFixture(fixDef);
-	
-	fixDef.shape = new b2PolygonShape;
-	var vertices = [];
-	vertices.push(new b2Vec2(0, 8.8));
-	vertices.push(new b2Vec2(6, 8.3));
-	vertices.push(new b2Vec2(6, 8.8));
-	fixDef.shape.SetAsVector(vertices, vertices.count);
-	bodyDef.position.Set(0,0);
-	world.CreateBody(bodyDef).CreateFixture(fixDef);
-	
-	fixDef.shape = new b2PolygonShape;
-	var vertices = [];
-	vertices.push(new b2Vec2(6, 8.3));
-	vertices.push(new b2Vec2(13, 8.8));
-	vertices.push(new b2Vec2(6, 8.8));
+	vertices = [];
+	vertices.push(new b2Vec2(3, -0.5));
+	vertices.push(new b2Vec2(7, -.5));
+	vertices.push(new b2Vec2(3, 2));
 	fixDef.shape.SetAsVector(vertices, vertices.count);
 	bodyDef.position.Set(0,0);
 	world.CreateBody(bodyDef).CreateFixture(fixDef);
 
-	//bridge
-	bodyDef.type = b2Body.b2_staticBody;
 	fixDef.shape = new b2PolygonShape;
-	fixDef.shape.SetAsBox(0.01, 0.01);
-	bodyDef.position.Set(8, 5);
-	var anchorBody = world.CreateBody(bodyDef);
-	anchorBody.CreateFixture(fixDef);
+	vertices = [];
+	vertices.push(new b2Vec2(5.06, 7.22));
+	vertices.push(new b2Vec2(6.56, 8.34));
+	vertices.push(new b2Vec2(5.04, 9.14));
+	fixDef.shape.SetAsVector(vertices, vertices.count);
+	bodyDef.position.Set(0,0);
+	world.CreateBody(bodyDef).CreateFixture(fixDef);
 
+	fixDef.shape = new b2PolygonShape;
+	vertices = [];
+	vertices.push(new b2Vec2(16.42, 0.24));
+	vertices.push(new b2Vec2(14.68, 9.62));
+	vertices.push(new b2Vec2(16.82, 9.48));
+	fixDef.shape.SetAsVector(vertices, vertices.count);
+	bodyDef.position.Set(0,0);
+	world.CreateBody(bodyDef).CreateFixture(fixDef);
+
+	fixDef.shape = new b2PolygonShape;
+	vertices = [];
+	vertices.push(new b2Vec2(4.56, -0.08));
+	vertices.push(new b2Vec2(-0.08, 2.52));
+	vertices.push(new b2Vec2(-0.04, -0.12));
+	fixDef.shape.SetAsVector(vertices, vertices.count);
+	bodyDef.position.Set(0,0);
+	world.CreateBody(bodyDef).CreateFixture(fixDef);
+
+	fixDef.shape = new b2PolygonShape;
+	vertices = [];
+	vertices.push(new b2Vec2(5.4, 0.32));
+	vertices.push(new b2Vec2(17.4, 1.56));
+	vertices.push(new b2Vec2(17.36, -0.08));
+	vertices.push(new b2Vec2(5.86, -0.08));
+	fixDef.shape.SetAsVector(vertices, vertices.count);
+	bodyDef.position.Set(0,0);
+	world.CreateBody(bodyDef).CreateFixture(fixDef);
+
+
+	// bolt
 	bodyDef.type = b2Body.b2_dynamicBody;
 	fixDef.shape = new b2PolygonShape;
-	var frameBody = world.CreateBody(bodyDef);
-	var angle = 0; //
-
-	center = new b2Vec2(0,-0.5);
-	fixDef.shape.SetAsOrientedBox(2, 1.25, center, angle);	
-	frameBody.CreateFixture(fixDef);
-
-	center = new b2Vec2(-1.8,1.5);
-	fixDef.shape.SetAsOrientedBox(0.2, 0.75, center, angle);	
-	frameBody.CreateFixture(fixDef); 
-
-	center = new b2Vec2(1.8,1.5);
-	fixDef.shape.SetAsOrientedBox(0.2, 0.75, center, angle);	
-	frameBody.CreateFixture(fixDef); 
-
-	center = new b2Vec2(0,2.1);
-	fixDef.shape.SetAsOrientedBox(2, 0.2, center, angle);	
-	frameBody.CreateFixture(fixDef); 
-
-	fixDef.shape = new b2PolygonShape;
-	fixDef.shape.SetAsBox(0.5, 0.5);
-	bodyDef.position.Set(8.88, 6.38);
-	world.CreateBody(bodyDef).CreateFixture(fixDef);
-
-	var revJointDef = new b2RevoluteJointDef;
-	revJointDef.bodyA = anchorBody;
-	revJointDef.bodyB = frameBody;
-	revJointDef.anchor = new b2Vec2(8, 5);
-	revJointDef.collideConnected = false;
-	var revJoint = world.CreateJoint(revJointDef);
-
+	fixDef.shape.SetAsBox(0.5, 1);
+	bodyDef.position.Set(4,7.6);
+	var body1 = world.CreateBody(bodyDef);
+	body1.CreateFixture(fixDef); 
+	var center = new b2Vec2(0,1.2);
+	var angle = 0; //0.5 * b2Settings.b2_pi;
+	fixDef.shape.SetAsOrientedBox(1, 0.2, center, angle);
+	body1.CreateFixture(fixDef);
 	
 	// create the circles
-	fixDef.filter.groupIndex = 1;
 	bodyDef.type = b2Body.b2_dynamicBody;
-	fixDef.shape = new b2CircleShape(0.5);//radius
-	bodyDef.position.Set(1.04, 0.56);
+	fixDef.density = 0.1;
+	fixDef.shape = new b2CircleShape(0.4);//radius
+	bodyDef.position.Set(4, 6);
 
 	var circleBody0 = world.CreateBody(bodyDef);
 	circleBody0.CreateFixture(fixDef);
 
-	bodyDef.position.Set(2.1, 0.5);
+	bodyDef.position.Set(3, 5.3);
 	var circleBody1 = world.CreateBody(bodyDef);
 	circleBody1.CreateFixture(fixDef);
 
-	bodyDef.position.Set(3.14, 0.5);
+	bodyDef.position.Set(2, 4.6);
 	var circleBody2 = world.CreateBody(bodyDef);
 	circleBody2.CreateFixture(fixDef);
 
@@ -169,7 +217,7 @@ function level10() {
 	bodyDef.type = b2Body.b2_staticBody;
 	fixDef.shape = new b2PolygonShape;
 	fixDef.shape.SetAsBox(0.3, 0.2);
-	bodyDef.position.Set(9.36, 0.62);
+	bodyDef.position.Set(9.9, 7.44);
 	var bonbon = world.CreateBody(bodyDef);
 	bonbon.CreateFixture(fixDef); 
 	var vertices = [];
@@ -188,7 +236,7 @@ function level10() {
 	//lolly
 	bodyDef.userData = 'lolly';	
 	fixDef.shape = new b2CircleShape(0.25);
-	bodyDef.position.Set(13.36, 3.84);
+	bodyDef.position.Set(11.92, 6.98);
 	var lolly = world.CreateBody(bodyDef);
 	lolly.CreateFixture(fixDef);
 	fixDef.shape = new b2PolygonShape;
@@ -200,11 +248,11 @@ function level10() {
 	//drop
 	bodyDef.userData = 'drop';	
 	fixDef.shape = new b2CircleShape(0.3);
-	bodyDef.position.Set(10.8, 6.82);
+	bodyDef.position.Set(8.36, 6.98);
 	var drop = world.CreateBody(bodyDef);
 	drop.CreateFixture(fixDef);
 	fixDef.isSensor = false;
-	
+
 	//setup debug draw
 	var debugDraw = new b2DebugDraw();
 	debugDraw.SetSprite(document.getElementById("canvas").getContext("2d"));
@@ -250,7 +298,7 @@ function level10() {
 
 	    selectedBody = null;
 	    world.QueryAABB(getBodyCB, aabb);
-	    if(selectedBody == circleBody0 || selectedBody == circleBody1 || selectedBody == circleBody2 || selectedBody == frameBody)
+	    if(selectedBody == circleBody0 || selectedBody == circleBody1 || selectedBody == circleBody2)
 	    	return null;
 	    else
 	    	return selectedBody;
@@ -304,7 +352,7 @@ function level10() {
 		 sA=fxA.IsSensor();
 		 sB=fxB.IsSensor();
 		 if((sA && !sB) || (sB && !sA))	{
-			 if(sA && contact.GetFixtureB().GetBody() != frameBody)	{
+			 if(sA)	{
 
 				 destroy_list.push(contact.GetFixtureA().GetBody());
 
@@ -312,10 +360,10 @@ function level10() {
 				 colorCandy(contact.GetFixtureA().GetBody().GetUserData(), collectedCandy);
 				 
 			 }
-			 else if(sB && contact.GetFixtureA().GetBody() != frameBody) {
+			 else	{
 
 				 destroy_list.push(contact.GetFixtureB().GetBody());
-
+				
 				 // make collected candy colorful
 				 colorCandy(contact.GetFixtureB().GetBody().GetUserData(), collectedCandy);
 			 }
@@ -327,8 +375,8 @@ function level10() {
 	
 	//update
 	var basketAABB = new b2AABB;
-	basketAABB.lowerBound = new b2Vec2(13.04, 7.64);
-	basketAABB.upperBound = new b2Vec2(16, 9);
+	basketAABB.lowerBound = new b2Vec2(9, 9);
+	basketAABB.upperBound = new b2Vec2(11.2, 10.2);
 	var bodies = [];
 	var gameOver = false;
 	
@@ -358,8 +406,59 @@ function level10() {
 		}
 
 		world.Step(1 / 60, 10, 10);
-		world.DrawDebugData();
 		world.ClearForces();
+		
+		$("#canvas").clearCanvas();
+		world.DrawDebugData();
+		for (b = world.GetBodyList() ; b; b = b.GetNext())
+		{
+	      var angle = b.GetAngle()*(180/Math.PI);
+	      var pos = b.GetPosition();
+	      
+	      // Using Images to display bodies
+	      if(b.GetUserData() == 'lolly') {
+	    	  $("#canvas")
+	          .rotateCanvas({
+	              x: pos.x * SCALE, y: pos.y * SCALE,
+	              rotate: angle
+	          })
+	          .drawImage({
+	              source: 'img/theme1/lolly_red.png',
+	              x: pos.x * SCALE-2.6, y: pos.y * SCALE+6.6,
+	              width: 150*(43/190),
+	              height: 43,
+	              fromCenter: true
+	          })
+	          .restoreCanvas();
+	       } else if(b.GetUserData() == 'drop') {
+	    	  $("#canvas")
+	          .rotateCanvas({
+	              x: pos.x * SCALE, y: pos.y * SCALE,
+	              rotate: angle
+	          })
+	          .drawImage({
+	              source: 'img/theme1/drop_red.png',
+	              x: pos.x * SCALE, y: pos.y * SCALE,
+	              width: 0.3 * 2 * 50+2,
+	              height: 0.3 * 2 * 50+2,
+	              fromCenter: true
+	          })
+	          .restoreCanvas();
+	       } else if(b.GetUserData() == 'bonbon') {
+	    	  $("#canvas")
+	          .rotateCanvas({
+	              x: pos.x * SCALE, y: pos.y * SCALE,
+	              rotate: angle
+	          })
+	          .drawImage({
+	              source: 'img/theme1/bonbon_red.png',
+	              x: pos.x * SCALE, y: pos.y * SCALE,
+	              fromCenter: true
+	          })
+	          .restoreCanvas();
+	       }         
+		}
+		
 
 		world.QueryAABB(testIfEggsAreInBasket, basketAABB);
  

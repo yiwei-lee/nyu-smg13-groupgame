@@ -284,6 +284,7 @@ function level1() {
 	bodyDef.type = b2Body.b2_dynamicBody;
 	fixDef.shape = new b2CircleShape(0.45);//radius
 	bodyDef.position.Set(2, 1.5);
+	bodyDef.userData = 'circle';
 	var circleBody0 = world.CreateBody(bodyDef);
 	circleBody0.CreateFixture(fixDef);
 
@@ -486,9 +487,60 @@ function level1() {
 			}
 		}
 
-		world.Step(1 / 60, 10, 10);
-		world.DrawDebugData();
+		world.Step(1 / 60, 10, 10);		
 		world.ClearForces();
+		
+		$("#canvas").clearCanvas();
+		world.DrawDebugData();
+		for (b = world.GetBodyList() ; b; b = b.GetNext())
+		{
+	      var angle = b.GetAngle()*(180/Math.PI);
+	      var pos = b.GetPosition();
+	      
+	      // Using Images to display bodies
+	      if(b.GetUserData() == 'lolly') {
+	    	  $("#canvas")
+	          .rotateCanvas({
+	              x: pos.x * SCALE, y: pos.y * SCALE,
+	              rotate: angle
+	          })
+	          .drawImage({
+	              source: 'img/theme1/lolly_red.png',
+	              x: pos.x * SCALE-2.6, y: pos.y * SCALE+6.6,
+	              width: 150*(43/190),
+	              height: 43,
+	              fromCenter: true
+	          })
+	          .restoreCanvas();
+	       } else if(b.GetUserData() == 'drop') {
+	    	  $("#canvas")
+	          .rotateCanvas({
+	              x: pos.x * SCALE, y: pos.y * SCALE,
+	              rotate: angle
+	          })
+	          .drawImage({
+	              source: 'img/theme1/drop_red.png',
+	              x: pos.x * SCALE, y: pos.y * SCALE,
+	              width: 0.3 * 2 * 50+2,
+	              height: 0.3 * 2 * 50+2,
+	              fromCenter: true
+	          })
+	          .restoreCanvas();
+	       } else if(b.GetUserData() == 'bonbon') {
+	    	  $("#canvas")
+	          .rotateCanvas({
+	              x: pos.x * SCALE, y: pos.y * SCALE,
+	              rotate: angle
+	          })
+	          .drawImage({
+	              source: 'img/theme1/bonbon_red.png',
+	              x: pos.x * SCALE, y: pos.y * SCALE,
+	              fromCenter: true
+	          })
+	          .restoreCanvas();
+	       }         
+		}
+		
 
 		world.QueryAABB(testIfEggsAreInBasket, basketAABB);
 		

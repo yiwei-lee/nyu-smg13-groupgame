@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
     <link rel="stylesheet" href="css/themes/main.min.css" />
     <link rel="stylesheet" href="css/themes/jquery.mobile.icons.min.css" />
-    
+    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.0-rc.1/jquery.mobile.structure-1.4.0-rc.1.min.css" />
     <script type="text/javascript" src="js/Box2dWeb-2.1.a.3.js"></script>
     <script src="js/bourke.js"></script>
     <script src="js/triangulate.js"></script>
@@ -26,8 +26,15 @@
     function closeWindow() {
         window.close();
     }
+
+    function selectLevel(x) {
+        localStorage.currentTheme = "" + x;
+    }
     </script>
     <style type="text/css">
+    #titleimg {
+        max-width: 100%;
+    }
     .grid-label {
         text-align:right;
     }
@@ -47,9 +54,11 @@
         height:120px;
         margin:12px;
         border:1px #8c7337 solid;
+        background-size:auto 100%;
     }
     .bgholder span {
         font-weight:bold;
+        position:relative;
     }
     .v-e-3 {
         margin-top:15% !important;
@@ -100,6 +109,24 @@
     .empty {
         width:80% !important;
     }
+    #theme1div {
+        background-image: url('./images/theme1.svg')
+    }
+    #theme2div {
+        background-image: url('./images/theme2.svg')
+    }
+    #theme3div {
+        background-image: url('./images/theme3.svg')
+    }
+    #theme4div {
+        background-image: url('./images/theme4.svg')
+    }
+    #theme5div {
+        background-image: url('./images/theme5.svg')
+    }
+    #theme6div {
+        background-image: url('./images/theme6.svg')
+    }
     </style>
 </head>
 
@@ -110,19 +137,19 @@
         </div>
         <div data-role='content'>
             <div style="text-align:center; margin:10px auto;">
-                <img src="img/themeselector/title.png" draggable='false'>
+                <img id='titleimg' src="images/title.png" draggable='false'>
             </div>
             <div style='width:256px; margin:48px auto;'>
                 <div style="position: relative;">
-                    <img src='img/themeselector/egg-2.png' class='corner BR rotate' />
+                    <img src='images/egg-2.png' class='corner BR rotate' />
                     <a href='#themeselectpage' data-role='button' data-icon='star' style="margin-top: 24px" draggable='false'>Start</a>
                 </div>
                 <div style="position: relative;">
-                    <img src='img/themeselector/egg-3.png' class='corner BR rotate2' />
+                    <img src='images/egg-3.png' class='corner BR rotate2' />
                     <a href='#optionpage' data-role='button' data-icon='gear' style="margin-top: 24px" draggable='false'>Option</a>
                 </div>
                 <div style="position: relative;">
-                    <img src='img/themeselector/egg-4.png' class='corner TR rotate' />
+                    <img src='images/egg-4.png' class='corner TR rotate' />
                     <a href='#' id='quitbtn' data-role='button' data-icon='delete' style="margin-top: 24px" draggable='false'>Quit</a>
                 </div>
 
@@ -179,21 +206,24 @@
             <div style="text-align:center">
                 <div class="ui-grid-b ">
                     <div class="ui-block-a">
-                        <div class='bgholder'>
-                            <a href="theme1levelselector.html" class='divlink'></a>
+                        <div id='theme1div' class='bgholder'>
+                            <img src='images/tick.png' class='corner BR' />
+                            <a href="theme1levelselector.html" rel="external" class='divlink' onclick="selectLevel(1)"></a>
                             <span>Theme 1</span>
                         </div>
                     </div>
                     <div class="ui-block-b">
-                        <div class='bgholder'>
-                            <a href="#mainpage" class='divlink'></a>
-                            <span>Theme 1</span>
+                        <div id='theme2div' class='bgholder'>
+                            <img src='images/tick.png' class='corner BR' />
+                            <a href="theme2levelselector.html" rel="external" class='divlink' onclick="selectLevel(2)"></a>
+                            <span>Theme 2</span>
                         </div>
                     </div>
                     <div class="ui-block-c">
-                        <div class='bgholder'>
-                            <a href="#mainpage" class='divlink'></a>
-                            <span>Theme 1</span>
+                        <div id='theme3div' class='bgholder'>
+                            <img src='images/tick.png' class='corner BR' />
+                            <a href="theme3levelselector.html" rel="external" class='divlink' onclick="selectLevel(3)"></a>
+                            <span>Theme 3</span>
                         </div>
                     </div>
                 </div>
@@ -201,33 +231,41 @@
             <div style="text-align:center">
                 <div class="ui-grid-b">
                     <div class="ui-block-a">
-                        <div class='bgholder'>
-                            <a href="#mainpage" class='divlink'></a>
+                        <div id='theme4div' class='bgholder'>
+                            <img src='images/tick.png' class='corner BR' />
+                            <a href="theme4levelselector.html" rel="external" class='divlink' onclick="selectLevel(4)"></a>
                             <span>Theme 4</span>
                         </div>
                     </div>
                     <div class="ui-block-b">
-                        <div class='bgholder'>
-                            <a href="#mainpage" class='divlink'></a>
+                        <div id='theme5div' class='bgholder'>
+                            <img src='images/tick.png' class='corner BR' />
+                            <a href="theme5levelselector.html" rel="external" class='divlink' onclick="selectLevel(5)"></a>
                             <span>Theme 5</span>
                         </div>
                     </div>
                     <div class="ui-block-c">
-                        <div class='bgholder'>
-                            <a href="#mainpage" class='divlink'></a>
+                        <div id='theme6div' class='bgholder'>
+                            <img src='images/tick.png' class='corner BR' />
+                            <a href="theme6levelselector.html" rel="external" class='divlink' onclick="selectLevel(6)"></a>
                             <span>Theme 6</span>
                         </div>
                     </div>
                 </div>
                 <a href='#mainpage' data-role='button' data-icon='back' draggable='false'>Back</a>
             </div>
-            <!-- <div class='ui-grid-b'>
-                <div class='ui-block-a'></div>
-                <div class='ui-block-b'>
-
-                </div>
-                <div class='ui-block-c'></div>
-            </div> -->
+            <script type="text/javascript">
+            $(".bgholder img").hide();
+            var completedThemesString = localStorage.completedThemes;
+            if (completedThemes != null){
+            	var completedThemes = JSON.parse(completedThemesString);
+            	for (var i = 0 ; i < completedThemes ; i++){
+            		if ((completedThemes[i] != null) && (parse(completedThemes[i]) == 1)){
+            			$("#theme"+(++i)+"div img").show();
+            		}
+            	}
+            }
+            </script>
         </div>
         <div data-role='footer'>
             <h1>SMG Fall 2013 NYU</h1>

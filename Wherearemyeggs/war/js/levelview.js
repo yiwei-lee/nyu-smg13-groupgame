@@ -104,7 +104,8 @@ function menu() {
 		"theme" + currentTheme + "levelselector.html",
 	    {
 	      transition       	: 'pop',
-	      reverse			: true
+	      reverse			: true, 
+	      reloadPage        : true
 	    }
 	);
 	resetCanvas();

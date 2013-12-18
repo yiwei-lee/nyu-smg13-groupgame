@@ -127,7 +127,7 @@ window.cancelRequestAnimFrame = (function() {
 var currentAnim = null;
 var isStarted = false;
 
-function level4() {
+function level4()  {
     cancelAnimationFrame(currentAnim);
 
     var b2Vec2 = Box2D.Common.Math.b2Vec2,
@@ -172,9 +172,11 @@ function level4() {
         var bodyB = c.GetFixtureB().GetBody();
         if (bodyA == startBody && level_collectable_obj.indexOf(bodyB) != -1) {
             score += level_collectable_score[level_collectable_obj.indexOf(bodyB)];
+            colorCandy(score);
             toDestroy.push(bodyB);
         } else if (bodyB == startBody && level_collectable_obj.indexOf(bodyA) != -1) {
             score += level_collectable_score[level_collectable_obj.indexOf(bodyA)];
+            colorCandy(score);
             toDestroy.push(bodyA);
         } else if (bodyA == startBody && bodyB == endBody) {
             level_complete = true;
@@ -190,7 +192,7 @@ function level4() {
     var debugDraw = new b2DebugDraw();
     debugDraw.SetSprite(ctxCanvas);
     debugDraw.SetDrawScale(30.0);
-    debugDraw.SetFillAlpha(0.5);
+    debugDraw.SetFillAlpha(1.0);
     debugDraw.SetLineThickness(1.0);
     debugDraw.SetFlags(b2DebugDraw.e_shapeBit | b2DebugDraw.e_jointBit);
     world.SetDebugDraw(debugDraw);
@@ -461,12 +463,9 @@ function level4() {
         world.ClearForces();
 
         if (level_complete) {
-            level_complete = false;
-            if (score >= 3) {
-                alert("Level Complete!");
-            } else {
-                alert("Not enough score...");
-            }
+            //Console.log("Start saving candy...");
+            saveCollectedCandy(score);
+            levelFinished();
         }
 
         currentAnim = requestAnimFrame(update);
