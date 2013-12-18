@@ -531,7 +531,7 @@ function daniel_init() {
           
       }
       else if (daniel_level ==2){
-    	  daniel_eggs[0] = new daniel_Body(daniel_physics, { image:img_egg, type: "static", shape: "circle", radius: 2, x: 15, y: 7.5, width:4, height:4 });
+    	  daniel_eggs[0] = new daniel_Body(daniel_physics, { image:img_egg, type: "static", shape: "circle", radius: 2, x: 15, y: 5, width:4, height:4 });
     	  new daniel_Body(daniel_physics, { image:img_plug, type: "static", x: 30, y:22, height: 0.5, width: 10 });
           
     	  new daniel_Body(daniel_physics, { color: "green", x: 4, y: 20, width: 10, height: 0.5 });
