@@ -8,12 +8,9 @@
     <link rel="stylesheet" href="css/themes/main.min.css" />
     <link rel="stylesheet" href="css/themes/jquery.mobile.icons.min.css" />
     <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.0-rc.1/jquery.mobile.structure-1.4.0-rc.1.min.css" />
-    <script type="text/javascript" src="js/Box2dWeb-2.1.a.3.js"></script>
-    <script src="js/bourke.js"></script>
-    <script src="js/triangulate.js"></script>
-    <script src="js/util.js"></script>
     <script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
     <script src="http://code.jquery.com/mobile/1.4.0-rc.1/jquery.mobile-1.4.0-rc.1.min.js"></script>
+    <script type="text/javascript" src="js/Box2dWeb-2.1.a.3.js"></script>
     <style type="text/css">
     div {
         -webkit-user-select: none;
@@ -257,13 +254,13 @@
             <script type="text/javascript">
             $(".bgholder img").hide();
             var completedThemesString = localStorage.completedThemes;
-            if (completedThemes != null){
-            	var completedThemes = JSON.parse(completedThemesString);
-            	for (var i = 0 ; i < completedThemes ; i++){
-            		if ((completedThemes[i] != null) && (parse(completedThemes[i]) == 1)){
-            			$("#theme"+(++i)+"div img").show();
-            		}
-            	}
+            if (completedThemes != null) {
+                var completedThemes = JSON.parse(completedThemesString);
+                for (var i = 0; i < completedThemes; i++) {
+                    if ((completedThemes[i] != null) && (parse(completedThemes[i]) == 1)) {
+                        $("#theme" + (++i) + "div img").show();
+                    }
+                }
             }
             </script>
         </div>
