@@ -433,7 +433,12 @@ window.daniel_gameLoop = function() {
     			daniel_init();
     		}
     		*/
-    		levelFinished();
+    		if (daniel_level!=9)	{
+    			levelFinished();
+    		}
+    		else	{
+    			themeFinished();
+    		}
     		daniel_saveCollectedCandy();
     		
     	}

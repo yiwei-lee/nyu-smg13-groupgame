@@ -11,6 +11,9 @@
     <script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
     <script src="http://code.jquery.com/mobile/1.4.0-rc.1/jquery.mobile-1.4.0-rc.1.min.js"></script>
     <script type="text/javascript" src="js/Box2dWeb-2.1.a.3.js"></script>
+    <script type="text/javascript" src="js/facebook_login.js"></script>
+    
+
     <style type="text/css">
     div {
         -webkit-user-select: none;
@@ -128,9 +131,17 @@
 </head>
 
 <body>
+	<div id="fb-root"></div>
     <div data-role='page' id='mainpage' data-theme='a'>
         <div data-role='header'>
-            <h1>Welcome!</h1>
+        	<h1>Welcome!</h1>			
+        	<table width="100%">
+        	<tr><td align="left">
+        	<fb:login-button show-faces="false" autologoutlink="true" width="200" max-rows="1"></fb:login-button>
+        	</td><td align="right">
+        	<div class="fb-like" data-href="http://danielwidjaja-groupeasteregg.appspot.com/" data-layout="button_count" data-action="like" data-show-faces="false" data-share="true"></div>
+        	</td></tr>
+        	</table>
         </div>
         <div data-role='content'>
             <div style="text-align:center; margin:10px auto;">
