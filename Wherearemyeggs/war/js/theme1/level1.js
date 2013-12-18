@@ -431,7 +431,6 @@ function level1() {
 	var destroy_list = [];
 	var colListener = new Box2D.Dynamics.b2ContactListener();
 	var collectedCandy = new Array("0","0","0");
-	 alert("level1_1");
 	
 	colListener.BeginContact = function(contact) {
 		 var fxA=contact.GetFixtureA();

@@ -1,5 +1,6 @@
 $( document ).delegate("#levelselectorpage", "pageshow", function() {	
-	localStorage.currentTheme = ""+5; //will be set in themeselector
+	
+	localStorage.currentTheme = document.URL.slice(-19)[0]; //will be set in themeselector
 	var currentTheme = parseInt(localStorage.currentTheme); 
 	colorCollectedCandy(currentTheme);
 });
@@ -27,7 +28,7 @@ function colorCollectedCandy( theme ) {
 		collectedString = "";
 	    break;
 	  default:
-	    alert("Error could not load candy" + theme);
+	    alert("Error could not load collectible array with theme " + theme);
 	}
 	
 	if(collectedString != null && collectedString != "") {
@@ -95,6 +96,18 @@ function goToLevel(i) {
 			"theme" + currentTheme + "level.html",
 		    {
 		      transition: 'pop'
+		    }
+	);
+}
+
+function goToThemeSelector(i) {
+	localStorage.currentLevel = ""+i;
+	var currentTheme = parseInt(localStorage.currentTheme); 
+	$.mobile.changePage(
+			"theme" + currentTheme + "level.html",
+		    {
+		      transition: 	'pop',
+		      reverse: 		true
 		    }
 	);
 }

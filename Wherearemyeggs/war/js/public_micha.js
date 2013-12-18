@@ -1,6 +1,4 @@
 function colorCandy(candyType, collectedCandy) {
-	alert("here");
-	alert(collectedCandy);
 	if(candyType == "bonbon") {
 		 $(".collectable1").each(function() {
 			  $( this ).attr("src", "img/theme1/collectible1.png");
