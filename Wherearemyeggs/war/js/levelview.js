@@ -1,7 +1,7 @@
 // when the page gets shown the current level is loaded from local storage
 $( document ).delegate("#levelpage", "pageshow", function() {
 	var currentLevel = parseInt(localStorage.currentLevel);
-	var currentTheme = 1;//parseInt(localStorage.currentTheme); <-- must be added later
+	var currentTheme = parseInt(localStorage.currentTheme); 
 	loadLevel(currentLevel, currentTheme);
 });
 
@@ -37,6 +37,44 @@ function levelFinished() {
 	$( "#popup" ).popup( "open" );
 }
 
+//this gets called from the level9.js files... this gets called from level9.js
+function themeFinished(){
+	$( "#popupThemeComplete" ).popup( "open" );
+	completedTheme();
+}
+
+//this gets called from the levelx.js files...
+function eggDestroyed(){
+	$( "#popupGameOver" ).popup( "open" );
+}
+
+//saves completed theme to local storage
+function completedTheme() {
+	var completedThemeString = localStorage.completedThemes;
+	if(completedThemeString != null) {
+		var completedThemes = JSON.parse(completedThemeString);
+	}
+	else {
+		var completedThemes = new Array();
+	}
+	var currentTheme = parseInt(localStorage.currentTheme);
+	completedThemes[currentTheme-1] = 1;
+	localStorage.completedThemes = JSON.stringify(completedThemes);
+}
+
+//navigate to theme selector
+function themeSelector() {
+	stopUpdateFunction();
+	$.mobile.changePage(
+		"themeselector.html",
+	    {
+	      transition       	: 'pop',
+	      reverse			: true
+	    }
+	);
+	resetCanvas();
+}
+
 //open the next level and save new level index
 function next() {
 	$( "#popup" ).popup( "close" );
@@ -61,8 +99,9 @@ function next() {
 //open the menu
 function menu() {
 	stopUpdateFunction();
+	var currentTheme = parseInt(localStorage.currentTheme);
 	$.mobile.changePage(
-		"levelselector.html",
+		"levelselector" + currentTheme + ".html",
 	    {
 	      transition       	: 'pop',
 	      reverse			: true
@@ -74,11 +113,9 @@ function menu() {
 //load the javascript file and the description of the level and execute the javascript file
 function loadLevel ( level, theme ) {
 	resetCanvas();
-	//alert("weird");
 	//level = 10; //for debugging
 	var url = "js/theme" + theme + "/level" + level + ".js";
 	
-	url = "js/theme" + theme + "/design.js";
 	$.getScript( url, function() {
 		var description = levelInfo[theme-1][level-1][0];
 		var width = levelInfo[theme-1][level-1][1];

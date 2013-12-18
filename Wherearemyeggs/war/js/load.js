@@ -28,6 +28,7 @@ levelInfo[1][8] = new Array("Right Click in the transparent red area to create a
 
 //theme 3
 i = 2;
+levelInfo[i] = new Array();
 levelInfo[i][0] = new Array("", 800, 450);
 levelInfo[i][1] = new Array("", 800, 450);
 levelInfo[i][2] = new Array("", 800, 450);

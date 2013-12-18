@@ -297,7 +297,7 @@ function level8() {
 				 destroy_list.push(contact.GetFixtureA().GetBody());
 
 				 // make collected candy colorful
-				 colorCandy(contact.GetFixtureA().GetBody().GetUserData());
+				 colorCandy(contact.GetFixtureA().GetBody().GetUserData(), collectedCandy);
 				 
 			 }
 			 else	{
@@ -305,7 +305,7 @@ function level8() {
 				 destroy_list.push(contact.GetFixtureB().GetBody());
 
 				 // make collected candy colorful
-				 colorCandy(contact.GetFixtureB().GetBody().GetUserData());
+				 colorCandy(contact.GetFixtureB().GetBody().GetUserData(), collectedCandy);
 			 }
 		 }
 	 }	

@@ -1,9 +1,12 @@
 $( document ).delegate("#levelselectorpage", "pageshow", function() {	
-	colorCollectedCandy();
+	localStorage.currentTheme = ""+4; //will be set in themeselector
+	var currentTheme = parseInt(localStorage.currentTheme); 
+	colorCollectedCandy(currentTheme);
 });
 
-function colorCollectedCandy() {
+function colorCollectedCandy( theme ) {
 	var collectedCandyString = localStorage.collectedCandy;
+	alert(collectedCandyString);
 	if(collectedCandyString != null) {
 		var collectedCandy = JSON.parse(collectedCandyString);
 		var levelCandy;
@@ -19,13 +22,13 @@ function colorCollectedCandy() {
 					switch(j)
 					{
 					  case 0:
-						$("#candy"+(i+1)+"1").attr("src", "img/theme1/collectible1.png");
+						$("#candy"+(i+1)+"1").attr("src", "img/theme" + theme + "/collectible1.png");
 					    break;
 					  case 1:
-						$("#candy"+(i+1)+"2").attr("src", "img/theme1/collectible2.png");
+						$("#candy"+(i+1)+"2").attr("src", "img/theme" + theme + "/collectible2.png");
 					    break;
 					  case 2:
-						$("#candy"+(i+1)+"3").attr("src", "img/theme1/collectible3.png");
+						$("#candy"+(i+1)+"3").attr("src", "img/theme" + theme + "/collectible3.png");
 					    break;
 					  default:
 					    alert("Error could not load candy" + j);
@@ -35,13 +38,13 @@ function colorCollectedCandy() {
 					switch(j)
 					{
 					  case 0:
-						$("#candy"+(i+1)+"1").attr("src", "img/theme1/collectible1_bw.png");
+						$("#candy"+(i+1)+"1").attr("src", "img/theme" + theme + "/collectible1_bw.png");
 					    break;
 					  case 1:
-						$("#candy"+(i+1)+"2").attr("src", "img/theme1/collectible2_bw.png");
+						$("#candy"+(i+1)+"2").attr("src", "img/theme" + theme + "/collectible2_bw.png");
 					    break;
 					  case 2:
-						$("#candy"+(i+1)+"3").attr("src", "img/theme1/collectible3_bw.png");
+						$("#candy"+(i+1)+"3").attr("src", "img/theme" + theme + "/collectible3_bw.png");
 					    break;
 					  default:
 					    alert("Error could not load candy" + j);
@@ -64,8 +67,9 @@ $(".levelimg").each(function() {
 
 function goToLevel(i) {
 	localStorage.currentLevel = ""+i;
+	var currentTheme = parseInt(localStorage.currentTheme); 
 	$.mobile.changePage(
-			"level.html",
+			"level" + currentTheme + ".html",
 		    {
 		      transition: 'pop'
 		    }

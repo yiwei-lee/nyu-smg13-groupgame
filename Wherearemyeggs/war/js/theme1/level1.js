@@ -431,6 +431,7 @@ function level1() {
 	var destroy_list = [];
 	var colListener = new Box2D.Dynamics.b2ContactListener();
 	var collectedCandy = new Array("0","0","0");
+	 alert("level1_1");
 	
 	colListener.BeginContact = function(contact) {
 		 var fxA=contact.GetFixtureA();
@@ -441,15 +442,14 @@ function level1() {
 			 if(sA)	{
 				 
 				 destroy_list.push(contact.GetFixtureA().GetBody());
-				 
 				 // make collected candy colorful
-				 colorCandy(contact.GetFixtureA().GetBody().GetUserData());
+				 colorCandy(contact.GetFixtureA().GetBody().GetUserData(), collectedCandy);
 			 }
 			 else	{
 		
 				 destroy_list.push(contact.GetFixtureB().GetBody());
 				 // make collected candy colorful
-				 colorCandy(contact.GetFixtureB().GetBody().GetUserData());
+				 colorCandy(contact.GetFixtureB().GetBody().GetUserData(), collectedCandy);
 			 }
 		 }
 	 }	
