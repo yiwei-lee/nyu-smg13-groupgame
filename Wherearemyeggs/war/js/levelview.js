@@ -101,7 +101,7 @@ function menu() {
 	stopUpdateFunction();
 	var currentTheme = parseInt(localStorage.currentTheme);
 	$.mobile.changePage(
-		"levelselector" + currentTheme + ".html",
+		"theme" + currentTheme + "levelselector.html",
 	    {
 	      transition       	: 'pop',
 	      reverse			: true

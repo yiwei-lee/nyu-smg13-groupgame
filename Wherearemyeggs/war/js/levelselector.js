@@ -69,7 +69,7 @@ function goToLevel(i) {
 	localStorage.currentLevel = ""+i;
 	var currentTheme = parseInt(localStorage.currentTheme); 
 	$.mobile.changePage(
-			"level" + currentTheme + ".html",
+			"theme" + currentTheme + "level.html",
 		    {
 		      transition: 'pop'
 		    }
