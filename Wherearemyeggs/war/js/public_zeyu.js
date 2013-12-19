@@ -1,8 +1,55 @@
+//reference: abhishek yiwei
+function saveCollectedCandy(candyNum) {
+	var collectedCandyString = localStorage.zeyu_collectedCandy;
+	var levelNumber = parseInt(localStorage.currentLevel);
+	if (collectedCandyString != null) {
+		var collectedCandyAllLevels = JSON.parse(collectedCandyString);
+	} else {
+		var collectedCandyAllLevels = new Array();
+	}
+	var candyArray;
+	switch (candyNum) {
+		case 0 :
+			candyArray = new Array("0", "0", "0");
+			break;
+		case 1 :
+			candyArray = new Array("1", "0", "0");
+			break;
+		case 2 :
+			candyArray = new Array("1", "1", "0");
+			break;
+		default :
+			candyArray = new Array("1", "1", "1");
+			break;
+	}
+	collectedCandyAllLevels[levelNumber - 1] = JSON.stringify(candyArray);
+	localStorage.zeyu_collectedCandy = JSON.stringify(collectedCandyAllLevels);
+}
+
+// reference: micha yiwei
+function colorCandy(candyNum) {
+	if (candyNum >= 1) {
+		$(".collectable1").each(function() {
+			$(this).attr("src", "img/theme2/collectible1.png");
+		});
+	}
+	if (candyNum >= 2) {
+		$(".collectable2").each(function() {
+			$(this).attr("src", "img/theme2/collectible2.png");
+		});
+	}
+	if (candyNum >= 3) {
+		$(".collectable3").each(function() {
+			$(this).attr("src", "img/theme2/collectible3.png");
+		});
+	}
+}
+
 /*
  * Global variable dependency: _levelLoader
  */
 
-//Import Box2D constructors
+// Import Box2D constructors
 var b2Vec2 = Box2D.Common.Math.b2Vec2;
 var b2BodyDef = Box2D.Dynamics.b2BodyDef;
 var b2Body = Box2D.Dynamics.b2Body;
@@ -33,6 +80,7 @@ var _zeyu_resources;
 var _zeyu_levelPos = 0;
 var _zeyu_physics, _zeyu_lastFrame = new Date().getTime();
 var _zeyu_canvasW, _zeyu_canvasH;
+var _zeyu_candyNum;
 
 var zeyu_resourceList = [{
 	name : "ballImg",
@@ -65,160 +113,165 @@ window.zeyu_gameLoop = function() {
 
 function zeyu_init(callback) {
 
-	var resLoader = new zeyu_ResourceLoader(zeyu_resourceList, function(loaded) {
+	var resLoader = new zeyu_ResourceLoader(zeyu_resourceList,
+			function(loaded) {
 
-		_zeyu_resources = loaded;
+				_zeyu_resources = loaded;
 
-		var canvas = document.getElementById("canvas");
-		_zeyu_physics = new zeyu_Physics(canvas);
-		_zeyu_canvasW = canvas.width;
-		_zeyu_canvasH = canvas.height;
+				var canvas = document.getElementById("canvas");
+				_zeyu_physics = new zeyu_Physics(canvas);
+				_zeyu_canvasW = canvas.width;
+				_zeyu_canvasH = canvas.height;
 
-		// physics.debug();
-		_zeyu_physics.collision();
+				// physics.debug();
+				_zeyu_physics.collision();
+				
+				_zeyu_candyNum = 0;
 
-		// ground
-		new zeyu_Body(_zeyu_physics, {
-			id : ZEYU_WALL_ID,
-			color : "#e5e5e5",
-			type : "static",
-			x : _zeyu_canvasW / 2,
-			y : _zeyu_canvasH + 10,
-			height : 40,
-			width : _zeyu_canvasW
-		});
+				// ground
+				new zeyu_Body(_zeyu_physics, {
+					id : ZEYU_WALL_ID,
+					color : "#e5e5e5",
+					type : "static",
+					x : _zeyu_canvasW / 2,
+					y : _zeyu_canvasH + 10,
+					height : 40,
+					width : _zeyu_canvasW
+				});
 
-		// ceiling
-		new zeyu_Body(_zeyu_physics, {
-			id : ZEYU_WALL_ID,
-			color : "#e5e5e5",
-			type : "static",
-			x : _zeyu_canvasW / 2,
-			y : -20,
-			height : 40,
-			width : _zeyu_canvasW
-		});
+				// ceiling
+				new zeyu_Body(_zeyu_physics, {
+					id : ZEYU_WALL_ID,
+					color : "#e5e5e5",
+					type : "static",
+					x : _zeyu_canvasW / 2,
+					y : -20,
+					height : 40,
+					width : _zeyu_canvasW
+				});
+				// left wall
+				new zeyu_Body(_zeyu_physics, {
+					id : ZEYU_LEFT_WALL_ID,
+					color : "red",
+					type : "static",
+					x : -10,
+					y : _zeyu_canvasH / 2,
+					height : _zeyu_canvasH * 2,
+					width : 20
+				});
 
-		// left wall
-		new zeyu_Body(_zeyu_physics, {
-			id : ZEYU_LEFT_WALL_ID,
-			color : "red",
-			type : "static",
-			x : -10,
-			y : _zeyu_canvasH / 2,
-			height : _zeyu_canvasH * 2,
-			width : 20
-		});
+				// right wall
+				new zeyu_Body(_zeyu_physics, {
+					id : ZEYU_RIGHT_WALL_ID,
+					color : "red",
+					type : "static",
+					x : _zeyu_canvasW + 10,
+					y : _zeyu_canvasH / 2,
+					height : _zeyu_canvasH * 2,
+					width : 20
+				});
 
-		// right wall
-		new zeyu_Body(_zeyu_physics, {
-			id : ZEYU_RIGHT_WALL_ID,
-			color : "red",
-			type : "static",
-			x : _zeyu_canvasW + 10,
-			y : _zeyu_canvasH / 2,
-			height : _zeyu_canvasH * 2,
-			width : 20
-		});
+				_zeyu_physics.rightClickToCreate(function(e) {
 
-		_zeyu_physics.rightClickToCreate(function(e) {
-			var posX = e.offsetX || e.layerX, posY = e.offsetY || e.layerY;
+					var offset = $('canvas').offset();
 
-			_zeyu_physics.world.QueryPoint(function(fixture) {
-				var obj = fixture.GetBody().GetUserData();
-				if (obj && obj.details.id === ZEYU_START_POINT_ID) {
-					new zeyu_Body(_zeyu_physics, {
-						id : ZEYU_BALL_ID,
-						image : _zeyu_resources.ballImg,
-						shape : "circle",
-						x : posX,
-						y : posY,
-						radius : ZEYU_BALL_R,
-						width : ZEYU_BALL_R * 2,
-						height : ZEYU_BALL_R * 2,
-						density : 1,
-						friction : 0.5,
-						restitution : 0.5,
-						life : 1000
+					var posX = e.pageX - offset.left, posY = e.pageY
+							- offset.top;
+
+					_zeyu_physics.world.QueryPoint(function(fixture) {
+						var obj = fixture.GetBody().GetUserData();
+						if (obj && obj.details.id === ZEYU_START_POINT_ID) {
+							new zeyu_Body(_zeyu_physics, {
+								id : ZEYU_BALL_ID,
+								image : _zeyu_resources.ballImg,
+								shape : "circle",
+								x : posX,
+								y : posY,
+								radius : ZEYU_BALL_R,
+								width : ZEYU_BALL_R * 2,
+								height : ZEYU_BALL_R * 2,
+								density : 1,
+								friction : 0.5,
+								restitution : 0.5,
+								life : 1000
+							});
+						}
+					}, {
+						x : posX / _zeyu_physics.scale,
+						y : posY / _zeyu_physics.scale
 					});
-				}
-			}, {
-				x : posX / _zeyu_physics.scale,
-				y : posY / _zeyu_physics.scale
-			});
 
-			// if (isPointInBox({
-			// x : posX,
-			// y : posY
-			// }, _box)) {
-			// new Body(_physics, {
-			// id : BALL_ID,
-			// image : _resources.ballImg,
-			// shape : "circle",
-			// x : posX,
-			// y : posY,
-			// radius : BALL_R,
-			// width : BALL_R * 2,
-			// height : BALL_R * 2,
-			// density : 1,
-			// friction : 0.5,
-			// restitution : 0.5
-			// });
-			// }
+					// if (isPointInBox({
+					// x : posX,
+					// y : posY
+					// }, _box)) {
+					// new Body(_physics, {
+					// id : BALL_ID,
+					// image : _resources.ballImg,
+					// shape : "circle",
+					// x : posX,
+					// y : posY,
+					// radius : BALL_R,
+					// width : BALL_R * 2,
+					// height : BALL_R * 2,
+					// density : 1,
+					// friction : 0.5,
+					// restitution : 0.5
+					// });
+					// }
 
-			// Prevent the click event to be triggered
-			return false;
-		});
+					// Prevent the click event to be triggered
+					return false;
+				});
 
-		// $("#level-dialog").dialog({
-		// autoOpen : false,
-		// resizable : false,
-		// height : 200,
-		// modal : true,
-		// buttons : {
-		// "Go to next" : function() {
-		// nextLevel();
-		// $(this).dialog("close");
-		// },
-		// Cancel : function() {
-		// $(this).dialog("close");
-		// }
-		// }
-		// });
+				// $("#level-dialog").dialog({
+				// autoOpen : false,
+				// resizable : false,
+				// height : 200,
+				// modal : true,
+				// buttons : {
+				// "Go to next" : function() {
+				// nextLevel();
+				// $(this).dialog("close");
+				// },
+				// Cancel : function() {
+				// $(this).dialog("close");
+				// }
+				// }
+				// });
 
-		
+				_zeyu_physics.onMouseDown(function(e) {
+					_zeyu_physics.element.addEventListener("mousemove",
+							zeyu_doExplosion);
+				});
 
-		_zeyu_physics.onMouseDown(function(e) {
-			_zeyu_physics.element.addEventListener("mousemove", zeyu_doExplosion);
-		});
+				_zeyu_physics.onMouseUp(function(e) {
+					_zeyu_physics.element.removeEventListener("mousemove",
+							zeyu_doExplosion);
+				});
 
-		_zeyu_physics.onMouseUp(function(e) {
-			_zeyu_physics.element.removeEventListener("mousemove", zeyu_doExplosion);
-		});
-
-		if (zeyu_touchable()) {
-			_zeyu_physics
-					.onTouchStart(function(e) {
+				if (zeyu_touchable()) {
+					_zeyu_physics.onTouchStart(function(e) {
 						if (e.touches.length === 1)
 							_zeyu_physics.element.addEventListener("touchmove",
 									zeyu_doExplosion);
 					});
 
-			_zeyu_physics.onTouchEnd(function(e) {
-				if (e.touches.length === 1)
-					_zeyu_physics.element.removeEventListener("touchmove",
-							zeyu_doExplosion);
+					_zeyu_physics.onTouchEnd(function(e) {
+						if (e.touches.length === 1)
+							_zeyu_physics.element.removeEventListener(
+									"touchmove", zeyu_doExplosion);
+					});
+				}
+
+				_zeyu_physics.onClick(zeyu_doExplosion);
+
+				requestAnimationFrame(zeyu_gameLoop);
+
+				zeyu_resetWorld();
+
+				callback();
 			});
-		}
-
-		_zeyu_physics.onClick(zeyu_doExplosion);
-
-		requestAnimationFrame(zeyu_gameLoop);
-		
-		zeyu_resetWorld();
-		
-		callback();
-	});
 
 	resLoader.load();
 
@@ -263,9 +316,11 @@ function zeyu_doExplosion(e) {
 
 	var self = _zeyu_physics;
 
+	var offset = $('canvas').offset();
+
 	var pos = {
-		x : e.offsetX || e.layerX,
-		y : e.offsetY || e.layerY
+		x : e.pageX - offset.left,
+		y : e.pageY - offset.top
 	};
 
 	var explosionPolygon = zeyu_createCircle(20, pos, 30);
@@ -370,7 +425,6 @@ function zeyu_createCircle(precision, origin, radius) {
 	}
 }());
 
-
 function zeyu_createTerrain(data) {
 	var polys = [];
 	for ( var i in data) {
@@ -463,6 +517,7 @@ function zeyu_createPolygon(points, details) {
 
 function zeyu_createSensors(points) {
 	var sensorPoints = zeyu_translatePoints(points);
+	var candyNum = 0;
 
 	for ( var i in sensorPoints) {
 		var pos = sensorPoints[i];
@@ -482,6 +537,7 @@ function zeyu_createSensors(points) {
 		sensor.beginContact = function(obj) {
 			if (obj.details.id === ZEYU_BALL_ID) {
 				this.details.dead = true;
+				colorCandy(++_zeyu_candyNum);
 			}
 		};
 	}
@@ -499,6 +555,8 @@ function zeyu_createDestination(points) {
 
 	finishingPoint.beginContact = function(obj) {
 		levelFinished();
+		finishingPoint.beginContact = null;
+		saveCollectedCandy(_zeyu_candyNum);
 	};
 }
 
@@ -511,7 +569,8 @@ function zeyu_createRevoluteJoint(obj, point, motorSpeed) {
 	});
 
 	revoluteJointDef.Initialize(_zeyu_physics.world.GetGroundBody(), obj.body,
-			new b2Vec2(anchor.x / _zeyu_physics.scale, anchor.y / _zeyu_physics.scale));
+			new b2Vec2(anchor.x / _zeyu_physics.scale, anchor.y
+					/ _zeyu_physics.scale));
 
 	revoluteJointDef.maxMotorTorque = 5.0;
 	revoluteJointDef.motorSpeed = motorSpeed || 0;
@@ -529,8 +588,8 @@ function zeyu_createPrismaticJoint(obj, point, axis, speed) {
 	});
 
 	prismaticJointDef.Initialize(obj.body, _zeyu_physics.world.GetGroundBody(),
-			new b2Vec2(anchor.x / _zeyu_physics.scale, anchor.y / _zeyu_physics.scale),
-			axis);
+			new b2Vec2(anchor.x / _zeyu_physics.scale, anchor.y
+					/ _zeyu_physics.scale), axis);
 
 	prismaticJointDef.maxMotorForce = 10.0;
 	prismaticJointDef.motorSpeed = speed || 0;
@@ -564,8 +623,7 @@ function zeyu_translatePoint(point) {
 	};
 }
 
-
-//Body.js
+// Body.js
 (function(window) {
 
 	function zeyu_Body(physics, details) {
@@ -650,9 +708,10 @@ function zeyu_translatePoint(point) {
 			var terrainTriangles = [];
 			for (var i = 0; i < details.terrainPolys.length; i++) {
 				var poly = details.terrainPolys[i];
-				
-				if (!poly.outer) continue;
-				
+
+				if (!poly.outer)
+					continue;
+
 				var triContext = new poly2tri.SweepContext(poly.outer, {
 					cloneArrays : true
 				});
@@ -758,8 +817,9 @@ function zeyu_translatePoint(point) {
 						for ( var k in this.details.terrainPolys) {
 							var poly = this.details.terrainPolys[k];
 
-							if (!poly.outer) continue;
-							
+							if (!poly.outer)
+								continue;
+
 							context.beginPath();
 							context.moveTo(poly.outer[0].x, poly.outer[0].y);
 							for (var i = 1; i < poly.outer.length; i++) {
@@ -842,7 +902,7 @@ function zeyu_translatePoint(point) {
 
 })(window);
 
-//ResourceLoader.js
+// ResourceLoader.js
 (function(window) {
 	function zeyu_ResourceLoader(objList, callback) {
 		this.objList = objList;
@@ -869,9 +929,9 @@ function zeyu_translatePoint(point) {
 		res.src = url;
 
 		res.onload = function() {
-			
+
 			loader.resources[name] = res;
-			
+
 			if (++loader.loadCount == loader.objList.length)
 				loader.onload(loader.resources);
 		};
@@ -888,7 +948,7 @@ function zeyu_translatePoint(point) {
 	window.zeyu_ResourceLoader = zeyu_ResourceLoader;
 })(window);
 
-//Physics.js
+// Physics.js
 (function(window) {
 
 	var GRAVITY = 30;
@@ -931,7 +991,7 @@ function zeyu_translatePoint(point) {
 				if (obj.details.dead)
 					deadBodies.push(body);
 				if (!this.debugDraw) {
-					if ( obj.details.zIndex > 0) {
+					if (obj.details.zIndex > 0) {
 						drawLater.push(obj);
 					} else {
 						obj.draw(this.context);

@@ -226,9 +226,9 @@ function level8() {
 		}, new b2Vec2(1, 0), 4);
 
 		platform.beginContact = function(obj) {
-			if (obj.details.id === LEFT_WALL_ID) {
+			if (obj.details.id === ZEYU_LEFT_WALL_ID) {
 				prismaticJoint.SetMotorSpeed(-4);
-			} else if (obj.details.id === RIGHT_WALL_ID) {
+			} else if (obj.details.id === ZEYU_RIGHT_WALL_ID) {
 				prismaticJoint.SetMotorSpeed(4);
 			}
 		};

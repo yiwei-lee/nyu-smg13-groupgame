@@ -16,7 +16,7 @@ function colorCollectedCandy( theme ) {
 			collectedString = localStorage.collectedCandy;
 		    break;
 		  case 2:
-			collectedString = "";
+			collectedString = localStorage.zeyu_collectedCandy;
 		    break;
 		  case 3:
 			collectedString = localStorage.yiwei_collectedCandy;
