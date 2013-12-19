@@ -103,6 +103,8 @@ var world = null;
 var visibleFixturesQueryCallback;
 var m_fixtures;
 
+var selectedBody;
+
 var level1Timer;
 var level2Timer;
 var level3Timer;

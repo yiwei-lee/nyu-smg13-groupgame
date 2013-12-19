@@ -66,14 +66,14 @@ levelInfo[i][8] = new Array("Move egg by tapping to left or right (click or touc
 
 //theme 6
 levelInfo[5] = new Array();
-levelInfo[5][0] = new Array("Launch the egg towards the basket!!", 800, 450);
-levelInfo[5][1] = new Array("Launch the egg towards the basket!!", 800, 450);
-levelInfo[5][2] = new Array("Launch the egg towards the basket!!", 800, 450);
-levelInfo[5][3] = new Array("Launch the egg towards the basket!!", 800, 450);
-levelInfo[5][4] = new Array("Launch the egg towards the basket!!", 800, 450);
-levelInfo[5][5] = new Array("Launch the egg towards the basket!!", 800, 450);
-levelInfo[5][6] = new Array("Launch the egg towards the basket!!", 800, 450);
-levelInfo[5][7] = new Array("Launch the egg towards the basket!!", 800, 450);
-levelInfo[5][8] = new Array("Launch the egg towards the basket!!", 800, 450);
+levelInfo[5][0] = new Array("Launch the egg towards the basket!!", 600, 400);
+levelInfo[5][1] = new Array("Launch the egg towards the basket!!", 600, 400);
+levelInfo[5][2] = new Array("Launch the egg towards the basket!!", 600, 400);
+levelInfo[5][3] = new Array("Launch the egg towards the basket!!", 600, 400);
+levelInfo[5][4] = new Array("Launch the egg towards the basket!!", 600, 400);
+levelInfo[5][5] = new Array("Launch the egg towards the basket!!", 600, 400);
+levelInfo[5][6] = new Array("Launch the egg towards the basket!!", 600, 400);
+levelInfo[5][7] = new Array("Launch the egg towards the basket!!", 600, 400);
+levelInfo[5][8] = new Array("Launch the egg towards the basket!!", 600, 400);
 
 

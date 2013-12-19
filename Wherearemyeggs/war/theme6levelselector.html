@@ -1,9 +1,8 @@
 <html>
-
 <head>
     <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
 
-    <title>Title</title>
+    <title>Where Are My Eggs?</title>
     <link rel="stylesheet" href="css/game.css" />
     <link rel="stylesheet" href="css/themes/main.min.css" />
     <link rel="stylesheet" href="css/themes/jquery.mobile.icons.min.css" />
@@ -12,83 +11,110 @@
     <script src="http://code.jquery.com/mobile/1.4.0-rc.1/jquery.mobile-1.4.0-rc.1.min.js"></script>
     <script type="text/javascript" src="js/Box2dWeb-2.1.a.3.min.js"></script>
 </head>
-
-<body>
-    <div data-role="page" id="levelselectorpage">
-        <div data-role="header">
-            <h1>Select a Level!</h1>
-        </div>
-        <div data-role="content">
-            <table id="leveltable">
-                <tr>
-                    <td>
-                        <div class="leveldiv">
-                            <img class="levelimg" id="level1" src="img/1.png" width="75" />
-
-                        </div>
-                    </td>
-                    <td>
-                        <div class="leveldiv">
-                            <img class="levelimg" id="level2" src="img/2.png" width="75" />
-                            <div class="candydiv">
-                            </div>
-                        </div>
-                    </td>
-                    <td>
-                        <div class="leveldiv">
-                            <img class="levelimg" id="level3" src="img/3.png" width="75" />
-                            <div class="candydiv">
-                            </div>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <div class="leveldiv">
-                            <img class="levelimg" id="level4" src="img/4.png" width="75" />
-                            <div class="candydiv">
-                            </div>
-                        </div>
-                    </td>
-                    <td>
-                        <div class="leveldiv">
-                            <img class="levelimg" id="level5" src="img/5.png" width="75" />
-                            <div class="candydiv">
-                            </div>
-                        </div>
-                    </td>
-                    <td>
-                        <div class="leveldiv">
-                            <img class="levelimg" id="level6" src="img/6.png" width="75" />
-                            <div class="candydiv">
-                            </div>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <div class="leveldiv">
-                            <img class="levelimg" id="level7" src="img/7.png" width="75" />
-                            <div class="candydiv">
-                            </div>
-                        </div>
-                    </td>
-                    <td>
-                        <div class="leveldiv">
-                            <img class="levelimg" id="level8" src="img/8.png" width="75" />
-                            <div class="candydiv">
-                            </div>
-                        </div>
-                    </td>
-                    <td>
-                        <div class="leveldiv">
-                            <img class="levelimg" id="level9" src="img/9.png" width="75" />
-                            <div class="candydiv">
-                            </div>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
+	<body>
+	<div data-role="page" id="levelselectorpage">
+		<div data-role="header"> 
+			<h1>Select a Level!</h1> 
+		</div> 
+	  <div data-role="content">
+	  	<table id="leveltable">
+				<tr>
+					<td>
+						<div class="leveldiv">
+							<img class="levelimg" id="level1" src="img/1.png" width="75" />
+							<div class="stardiv">
+			    			<img class="starimg" id="star11" src="./img/theme6/starbw.jpeg" height="20" />
+			    			<img class="starimg" id="star12" src="./img/theme6/starbw.jpeg" height="20" />
+			    			<img class="starimg" id="star13" src="./img/theme6/starbw.jpeg" height="20" />
+							</div>
+						</div>
+					</td>
+					<td>
+						<div class="leveldiv">
+							<img class="levelimg" id="level2" src="img/2.png" width="75" />
+							<div class="stardiv">
+			    			<img class="starimg" id="star21" src="./img/theme6/starbw.jpeg" height="20" />
+			    			<img class="starimg" id="star22" src="./img/theme6/starbw.jpeg" height="20" />
+			    			<img class="starimg" id="star23" src="./img/theme6/starbw.jpeg" height="20" />
+							</div>
+						</div>
+					</td>
+					<td>
+						<div class="leveldiv">
+							<img class="levelimg" id="level3" src="img/3.png" width="75" />
+							<div class="stardiv">
+			    			<img class="starimg" id="star31" src="./img/theme6/starbw.jpeg" height="20" />
+			    			<img class="starimg" id="star32" src="./img/theme6/starbw.jpeg" height="20" />
+			    			<img class="starimg" id="star33" src="./img/theme6/starbw.jpeg" height="20" />
+							</div>
+						</div>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<div class="leveldiv">
+							<img class="levelimg" id="level4" src="img/4.png" width="75" />
+							<div class="stardiv">
+			    			<img class="starimg" id="star41" src="./img/theme6/starbw.jpeg" height="20" />
+			    			<img class="starimg" id="star42" src="./img/theme6/starbw.jpeg" height="20" />
+			    			<img class="starimg" id="star43" src="./img/theme6/starbw.jpeg" height="20" />
+							</div>
+						</div>
+					</td>
+					<td>
+						<div class="leveldiv">
+							<img class="levelimg" id="level5" src="img/5.png" width="75" />
+							<div class="stardiv">
+			    			<img class="starimg" id="star51" src="./img/theme6/starbw.jpeg" height="20" />
+			    			<img class="starimg" id="star52" src="./img/theme6/starbw.jpeg" height="20" />
+			    			<img class="starimg" id="star53" src="./img/theme6/starbw.jpeg" height="20" />
+							</div>
+						</div>
+					</td>
+					<td>
+						<div class="leveldiv">
+							<img class="levelimg" id="level6" src="img/6.png" width="75" />
+							<div class="stardiv">
+			    			<img class="starimg" id="star61" src="./img/theme6/starbw.jpeg" height="20" />
+			    			<img class="starimg" id="star62" src="./img/theme6/starbw.jpeg" height="20" />
+			    			<img class="starimg" id="star63" src="./img/theme6/starbw.jpeg" height="20" />
+							</div>
+						</div>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<div class="leveldiv">
+							<img class="levelimg" id="level7" src="img/7.png" width="75" />
+							<div class="stardiv">
+			    			<img class="starimg" id="star71" src="./img/theme6/starbw.jpeg" height="20" />
+			    			<img class="starimg" id="star72" src="./img/theme6/starbw.jpeg" height="20" />
+			    			<img class="starimg" id="star73" src="./img/theme6/starbw.jpeg" height="20" />
+							</div>
+						</div>
+					</td>
+					<td>
+						<div class="leveldiv">
+							<img class="levelimg" id="level8" src="img/8.png" width="75" />
+							<div class="stardiv">
+			    			<img class="starimg" id="star81" src="./img/theme6/starbw.jpeg" height="20" />
+			    			<img class="starimg" id="star82" src="./img/theme6/starbw.jpeg" height="20" />
+			    			<img class="starimg" id="star83" src="./img/theme6/starbw.jpeg" height="20" />
+							</div>
+						</div>
+					</td>
+					<td>
+						<div class="leveldiv">
+							<img class="levelimg" id="level9" src="img/9.png" width="75" />
+							<div class="stardiv">
+			    			<img class="starimg" id="star91" src="./img/theme6/starbw.jpeg" height="20" />
+			    			<img class="starimg" id="star92" src="./img/theme6/starbw.jpeg" height="20" />
+			    			<img class="starimg" id="star93" src="./img/theme6/starbw.jpeg" height="20" />
+							</div>
+						</div>
+					</td>
+				</tr>
+				<tr>
                     <td colspan="3" class="gobackbutton">
                         <a href="themeselector.html#themeselectpage" rel="external" data-role='button' data-icon='back' draggable='false'>Theme Selector</a>
                     </td>

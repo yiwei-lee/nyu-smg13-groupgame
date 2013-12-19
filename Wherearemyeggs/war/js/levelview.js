@@ -15,11 +15,13 @@ function stopUpdateFunction() {
 	}
 }
 
+
 //reloads the page
 function reloadPage() {
+	 
 	stopUpdateFunction();
-	
 	location.reload();
+	
 }
 
 //reset the canvas to show other stuff
@@ -66,7 +68,7 @@ function completedTheme() {
 function themeSelector() {
 	stopUpdateFunction();
 	$.mobile.changePage(
-		"themeselector.html",
+		"themeselector.html#themeselectpage",
 	    {
 	      transition       	: 'pop',
 	      reverse			: true
@@ -80,6 +82,7 @@ function next() {
 	$( "#popup" ).popup( "close" );
 	var currentLevel = parseInt(localStorage.currentLevel);
 	localStorage.currentLevel = "" + ++currentLevel;
+	console.log(localStorage.currentLevel);
 	
 	reloadPage();
 	
@@ -100,23 +103,31 @@ function next() {
 function menu() {
 	stopUpdateFunction();
 	var currentTheme = parseInt(localStorage.currentTheme);
+	localStorage.currentLevel = ""+0;
+	resetCanvas();
 	$.mobile.changePage(
 		"theme" + currentTheme + "levelselector.html",
 	    {
 	      transition       	: 'pop',
 	      reverse			: true, 
-	      reloadPage        : true
 	    }
 	);
-	resetCanvas();
+	
 }
+
 
 //load the javascript file and the description of the level and execute the javascript file
 function loadLevel ( level, theme ) {
+	
+	var currentTheme = parseInt(localStorage.currentTheme);
+	if(currentTheme == 6){
+		clearTimeInterval();
+	}
 	resetCanvas();
-	//level = 10; //for debugging
+	//level = 10; //for debuggingconsole.log("calling");
 	var url = "js/theme" + theme + "/level" + level + ".js";
 	
+		console.log("calling");
 	$.getScript( url, function() {
 		var description = levelInfo[theme-1][level-1][0];
 		var width = levelInfo[theme-1][level-1][1];
@@ -129,10 +140,24 @@ function loadLevel ( level, theme ) {
 		var context = canvas.getContext('2d');
 		context.canvas.width = width;
 		context.canvas.height = height;
-		
+		context.clearRect(0, 0, canvas.width, canvas.height);
 		window["level" + level](); //calls the function levelY();
 		$('#leveltxt').text("LEVEL " + level);
 		$('#leveldescription').text(description);			  
 	});
+	
+
+
 }
 
+function clearTimeInterval(){
+	clearInterval(level1Timer);
+	clearInterval(level2Timer);
+	clearInterval(level3Timer);
+	clearInterval(level4Timer);
+	clearInterval(level5Timer);
+	clearInterval(level6Timer);
+	clearInterval(level7Timer);
+	clearInterval(level8Timer);
+	clearInterval(level9Timer);
+}

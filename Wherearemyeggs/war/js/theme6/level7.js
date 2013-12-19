@@ -69,7 +69,7 @@ function level7(){
       
       // Query the world for overlapping shapes.
 
-      selectedBody = null;
+//       selectedBody = null;
       world.QueryAABB(getBodyCB, aabb);
       
       console.log(selectedBody.name);
