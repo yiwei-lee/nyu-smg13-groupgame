@@ -408,7 +408,31 @@ function level8() {
 	              fromCenter: true
 	          })
 	          .restoreCanvas();
-	       }  
+	       }  else if(b.GetUserData() == 'companioncube') {
+		    	  $("#canvas")
+		          .rotateCanvas({
+		              x: pos.x * SCALE, y: pos.y * SCALE,
+		              rotate: angle
+		          })
+		          .drawImage({
+		              source: 'img/theme1/bonbon_red.png',
+		              x: pos.x * SCALE, y: pos.y * SCALE,
+		              fromCenter: true
+		          })
+		          .restoreCanvas();
+		       } else if(b.GetUserData() == 'bridge') {
+			    	  $("#canvas")
+			          .rotateCanvas({
+			              x: pos.x * SCALE, y: pos.y * SCALE,
+			              rotate: angle
+			          })
+			          .drawImage({
+			              source: 'img/theme1/bonbon_red.png',
+			              x: pos.x * SCALE, y: pos.y * SCALE,
+			              fromCenter: true
+			          })
+			          .restoreCanvas();
+			       } 
 		}
 		
 
