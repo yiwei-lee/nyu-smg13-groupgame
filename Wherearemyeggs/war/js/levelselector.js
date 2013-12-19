@@ -1,6 +1,4 @@
 $( document ).delegate("#levelselectorpage", "pageshow", function() {	
-	
-	localStorage.currentTheme = document.URL.slice(-19)[0]; //will be set in themeselector
 	var currentTheme = parseInt(localStorage.currentTheme); 
 	colorCollectedCandy(currentTheme);
 });
